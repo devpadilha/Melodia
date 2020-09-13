@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CenaDo.unity
     guid: 8596fe316541b1c4794f9959d43998f4
   - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 1edb537176aa02e44bf0c492426389df
+  - enabled: 1
     path: Assets/Scenes/Cadastro.unity
-    guid: 02a750431849ae04f82fedb29c141b00
+    guid: 71b37518ed9ba4e40bc42c383b1f8225
   m_configObjects: {}

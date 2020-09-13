@@ -48,18 +48,28 @@ public class DropDownNascimento : MonoBehaviour
             case "dia":
                 for(int i = 1; i <= 31; i++)
                 {
-                    options.Add(i.ToString());
+                    String num = i.ToString();
+                    if(num.Length == 1)
+                    {
+                        num = "0" + num;
+                    }
+                    options.Add(num);
                 }
                 break;
             case "mes":
                 for (int i = 1; i <= 12; i++)
                 {
-                    options.Add(i.ToString());
+                    String num = i.ToString();
+                    if (num.Length == 1)
+                    {
+                        num = "0" + num;
+                    }
+                    options.Add(num);
                 }
                 break;
             case "ano":
                 for (int i = DateTime.Now.Year; i >= 1900 ; i--)
-                {
+                {               
                     options.Add(i.ToString());
                 }
                 break;
