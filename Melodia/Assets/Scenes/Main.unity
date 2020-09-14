@@ -231,9 +231,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 556370634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12bf55dd6e66de14ebadb443033af0be, type: 3}
+  m_Script: {fileID: 11500000, guid: 929b8ea5578b72d4cab88a0bd4c95143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: 
 --- !u!212 &556370636
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -308,7 +309,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1273868421}
   - component: {fileID: 1273868420}
-  - component: {fileID: 1273868422}
   - component: {fileID: 1273868423}
   - component: {fileID: 1273868424}
   m_Layer: 0
@@ -382,19 +382,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1273868422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273868419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b094d5b5c8d0f5248a2a2ac766156972, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: CenaDo
 --- !u!50 &1273868423
 Rigidbody2D:
   serializedVersion: 4

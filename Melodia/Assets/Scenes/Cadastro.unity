@@ -2952,7 +2952,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 895715090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff41b5c157362324d965274bbeb23323, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ba5acd884dbf1c4f8451a77f87134f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   login: {fileID: 111920313}
@@ -3505,7 +3505,7 @@ GameObject:
   - component: {fileID: 1097707228}
   - component: {fileID: 1097707227}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Cancelar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3540,7 +3540,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097707225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b094d5b5c8d0f5248a2a2ac766156972, type: 3}
+  m_Script: {fileID: 11500000, guid: 929b8ea5578b72d4cab88a0bd4c95143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Login
@@ -5249,9 +5249,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1823993135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12bf55dd6e66de14ebadb443033af0be, type: 3}
+  m_Script: {fileID: 11500000, guid: 929b8ea5578b72d4cab88a0bd4c95143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: 
 --- !u!1 &1854889803
 GameObject:
   m_ObjectHideFlags: 0
