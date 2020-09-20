@@ -3,6 +3,7 @@
     private int id;
     private string usuario;
     private string senha;
+    private bool ativo;
     private Jogador jogador;
 
     public int Id
@@ -38,6 +39,18 @@
         set
         {
             senha = value;
+        }
+    }
+
+    public bool Ativo
+    {
+        get
+        {
+            return ativo;
+        }
+        set
+        {
+            ativo = value;
         }
     }
 

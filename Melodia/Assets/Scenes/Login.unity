@@ -310,7 +310,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 329633109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b094d5b5c8d0f5248a2a2ac766156972, type: 3}
+  m_Script: {fileID: 11500000, guid: 929b8ea5578b72d4cab88a0bd4c95143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Cadastro
@@ -464,7 +464,7 @@ MonoBehaviour:
   mes: {fileID: 0}
   ano: {fileID: 0}
   retornoTelaLogin: {fileID: 1175501479}
-  sceneName: Main
+  sceneName: MainMenu
 --- !u!114 &357110053
 MonoBehaviour:
   m_ObjectHideFlags: 0

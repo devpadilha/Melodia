@@ -21,4 +21,14 @@
     {
         return model.save(login);
     }
+
+    public void setAtivo(int id)
+    {
+        model.setAtivo(id);
+    }
+
+    public Login getAtivo()
+    {
+        return model.getAtivo();
+    }
 }

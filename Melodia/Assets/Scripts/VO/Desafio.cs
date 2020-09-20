@@ -4,6 +4,7 @@
     private string descricao;
     private Elemento pergunta;
     private Elemento resposta;
+    private Nivel nivel;
 
     public int Id
     {
@@ -50,6 +51,18 @@
         set
         {
             resposta = value;
+        }
+    }
+
+    public Nivel Nivel
+    {
+        get
+        {
+            return nivel;
+        }
+        set
+        {
+            nivel = value;
         }
     }
 }
