@@ -72,6 +72,7 @@ public class DesafioModel
             {
                 rand = randNum.Next(0, retornos.Keys.Count);
             } while (rand == lastnum);
+            lastnum = rand;
             Desafio vo = getVO(retornos[rand]);
             desafios.Add(vo);
 
@@ -79,8 +80,7 @@ public class DesafioModel
             param = new Dictionary<string, string>();
             param.Add("partida", partida.Id.ToString());
             param.Add("desafio", vo.Id.ToString());
-            dataBase.Insert(query, param);
-            lastnum = rand;
+            dataBase.Insert(query, param);            
         }
 
         return desafios;

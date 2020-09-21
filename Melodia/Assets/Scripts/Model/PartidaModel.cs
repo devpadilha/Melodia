@@ -72,7 +72,7 @@ public class PartidaModel
         Partida partida = null;
         JogadorController jogadorController = new JogadorController();
         NivelController nivelController = new NivelController();
-        DesafioController desafioController = new DesafioController;
+        DesafioController desafioController = new DesafioController();
 
         string query = "INSERT INTO partida (acertos, erros, jogador_id, nivel_id, concluido, data) VALUES ( @acertos, @erros, @jogador, @nivel, @concluido, julianday('now'))";
         var param = new Dictionary<string, string>();

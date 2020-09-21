@@ -78,8 +78,8 @@ insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', '', '1'
 insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', '', '2');
 insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', '', '3');
 
-insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 0, 1, 1);
-insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 2, 3, 1);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 1, 2, 1);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 3, 4, 1);
 
 
 

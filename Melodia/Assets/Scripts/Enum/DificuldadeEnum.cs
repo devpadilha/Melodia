@@ -1,6 +1,6 @@
 ﻿public class DificuldadeEnum
 {
-   public enum Dificuldade
+   public enum Dificuldade : int
     {
         FACIL = 1,
         MEDIO = 2,

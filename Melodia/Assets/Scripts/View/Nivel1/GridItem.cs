@@ -23,6 +23,14 @@ public class GridItem : MonoBehaviour
         gameObject.name = string.Format("Sprite [{0}] [{1}]", comportamento, resource);
     }
 
+    private void OnMouseDown()
+    {
+        if (OnMouseOverItemEventHandler != null)
+        {
+            OnMouseOverItemEventHandler(this);
+        }
+    }
+
     public delegate void OnMouseOverItem(GridItem item);
-    public static event OnMouseOverItem OnMouseOverItemEventHandler;
+    public static event OnMouseOverItem OnMouseOverItemEventHandler; 
 }

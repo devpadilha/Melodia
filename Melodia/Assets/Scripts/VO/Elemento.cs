@@ -4,7 +4,6 @@
     private string nome;
     private string descricao;
     private string resource;
-    private Nivel nivel;
 
     public int Id
     {
@@ -51,18 +50,6 @@
         set
         {
             resource = value;
-        }
-    }
-
-    public Nivel Nivel
-    {
-        get
-        {
-            return nivel;
-        }
-        set
-        {
-            nivel = value;
         }
     }
 }
