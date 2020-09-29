@@ -32,8 +32,8 @@ public class ElementoModel
 
     public List<Elemento> getErradasByDesafio(Desafio desafio, int qtde)
     {
-        Random randNum = new Random();
-        int lastnum = -1, rand = -1;
+        RandomUtil randNum;
+        int rand;
         List<Elemento> elementos = new List<Elemento>();
 
         string query = "SELECT e.id, e.nome, e.descricao, e.resource FROM elemento e " +
@@ -50,13 +50,12 @@ public class ElementoModel
             qtde = retornos.Keys.Count;
         }
 
+        randNum = new RandomUtil(0, retornos.Keys.Count);
+
         for (int i = 0; i < qtde; i++)
         {
-            do
-            {
-                rand = randNum.Next(0, retornos.Keys.Count);
-            } while (rand == lastnum);
-            lastnum = rand;
+           
+            rand = randNum.get();            
 
             Elemento vo = getVO(retornos[rand]);
             elementos.Add(vo);

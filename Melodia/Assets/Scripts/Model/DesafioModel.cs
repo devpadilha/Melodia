@@ -53,8 +53,8 @@ public class DesafioModel
 
     public List<Desafio> criarDesafios(Partida partida, int qtde)
     {
-        Random randNum = new Random();
-        int lastnum = -1, rand = -1;
+        RandomUtil randNum;
+        int rand;
         List<Desafio> desafios = new List<Desafio>();
         string query = "SELECT id, descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id FROM desafio WHERE nivel_id = @nivel";
         var param = new Dictionary<string, string>();
@@ -66,13 +66,12 @@ public class DesafioModel
             qtde = retornos.Keys.Count;
         }
 
-        for(int i=0; i<qtde; i++)
+        randNum = new RandomUtil(0, retornos.Keys.Count);
+
+        for (int i=0; i<qtde; i++)
         {
-            do
-            {
-                rand = randNum.Next(0, retornos.Keys.Count);
-            } while (rand == lastnum);
-            lastnum = rand;
+            rand = randNum.get();
+            
             Desafio vo = getVO(retornos[rand]);
             desafios.Add(vo);
 

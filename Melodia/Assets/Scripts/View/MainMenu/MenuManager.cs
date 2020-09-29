@@ -25,12 +25,6 @@ public class MenuManager : MonoBehaviour
         MenuItem.OnMouseOverItemEventHandler += MouseClick;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void MouseClick(MenuItem item)
     {
         Debug.Log(item.Nivel);
@@ -47,6 +41,10 @@ public class MenuManager : MonoBehaviour
             item = items[0];
             newItem = Instantiate(item, new Vector3(-5, -3), Quaternion.identity).GetComponent<MenuItem>();
             newItem.create("Nivel1", "0");
+
+            item = items[1];
+            newItem = Instantiate(item, new Vector3(-3, -2.5f), Quaternion.identity).GetComponent<MenuItem>();
+            newItem.create("Nivel2", "1");
         }
     }
 

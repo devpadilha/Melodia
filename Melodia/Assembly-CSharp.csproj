@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Model\NivelModel.cs" />
     <Compile Include="Assets\Scripts\Model\PartidaModel.cs" />
     <Compile Include="Assets\Scripts\Util\ObjectClicker.cs" />
+    <Compile Include="Assets\Scripts\Util\RandomUtil.cs" />
     <Compile Include="Assets\Scripts\Util\SceneUtil.cs" />
     <Compile Include="Assets\Scripts\VO\Desafio.cs" />
     <Compile Include="Assets\Scripts\VO\Dificuldade.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="Assets\Scripts\View\MainMenu\MenuManager.cs" />
     <Compile Include="Assets\Scripts\View\Nivel1\GridItem.cs" />
     <Compile Include="Assets\Scripts\View\Nivel1\GridManager.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel2\GridItem2.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel2\GridManager2.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

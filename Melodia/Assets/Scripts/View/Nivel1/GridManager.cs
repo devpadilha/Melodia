@@ -52,11 +52,20 @@ public class GridManager : MonoBehaviour
 
     private void CreateGrid()
     {
-        Random randNum = new Random();
-        int rand = -1, lastnum = -1;
+        RandomUtil randNum = new RandomUtil(2, 4);
+        int rand;
 
         Desafio desafio = partida.Desafios[index];
-        
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null)
+            {
+                Destroy(items[i].gameObject);
+                items[i] = null;
+            }
+        }
+
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
         {
             List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 1);
@@ -64,24 +73,16 @@ public class GridManager : MonoBehaviour
 
             items[0] = InstantiateElemento(Comportamento.PERGUNTA, desafio.Pergunta.Resource, grid[0]);
 
-            do
-            {
-                rand = randNum.Next(3, 5);                
-            } while (rand == lastnum);
-            lastnum = rand;
+            rand = randNum.get();
 
-            print(desafio.Resposta.Resource);
+            print(rand);
 
-            items[1] = InstantiateElemento(Comportamento.RESPOSTACERTA, desafio.Resposta.Resource, grid[2]);
+            items[1] = InstantiateElemento(Comportamento.RESPOSTACERTA, desafio.Resposta.Resource, grid[rand]);
 
-            do
-            {
-                rand = randNum.Next(3, 5);
-            } while (rand == lastnum);
-            lastnum = rand;
+            rand = randNum.get();
 
-            print(desafio.Resposta.Resource);
-            items[2] = InstantiateElemento(Comportamento.RESPOSTAERRADA, respostasErradas[0].Resource, grid[3]);     
+            print(rand);
+            items[2] = InstantiateElemento(Comportamento.RESPOSTAERRADA, respostasErradas[0].Resource, grid[rand]);     
         } 
     }
 
@@ -113,20 +114,27 @@ public class GridManager : MonoBehaviour
 
     void MouseClick(GridItem item)
     {
-
+        GameObject[] reacoes = Resources.LoadAll<GameObject>("Reacoes");
         print(item.Comportamento);
         if (item.Comportamento.Equals(Comportamento.RESPOSTACERTA.ToString()))
         {
            
             for (int i = 0; i < items.Length; i++)
-            {
-                Destroy(items[i].gameObject);
+            {                            
+                if (items[i] != null)
+                {
+                    Destroy(items[i].gameObject);
+                    items[i] = null;
+                }
             }
+
+            GameObject elemento = reacoes[0];
+            items[0] = Instantiate(elemento, new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem>();
 
             index++;
             if(index < partida.Desafios.ToArray().Length)
             {
-                CreateGrid();
+                Invoke(nameof(CreateGrid), 2.0f);
             }
 
         }
@@ -136,8 +144,11 @@ public class GridManager : MonoBehaviour
             {
                 Destroy(items[i].gameObject);
             }
-            new WaitForSeconds(2);
-            CreateGrid();
+
+            GameObject elemento = reacoes[1];
+            items[0] = Instantiate(elemento, new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem>();
+            Invoke(nameof(CreateGrid), 2.0f);
+
         }
         
     }

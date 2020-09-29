@@ -73,13 +73,26 @@ insert into nivel (nome, descricao, dificuldade_id) values ('NIVEL1', 'Nível 1 
 insert into nivel (nome, descricao, dificuldade_id) values ('NIVEL1', 'Nível 1 - Assimilação', 2);
 insert into nivel (nome, descricao, dificuldade_id) values ('NIVEL1', 'Nível 1 - Assimilação', 3);
 
-insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', '', '0');
-insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', '', '1');
-insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', '', '2');
-insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', '', '3');
+insert into nivel (nome, descricao, dificuldade_id) values ('NIVEL2', 'Nível 2 - Quebra-Cabeça', 1);
+insert into nivel (nome, descricao, dificuldade_id) values ('NIVEL2', 'Nível 2 - Quebra-Cabeça', 2);
+insert into nivel (nome, descricao, dificuldade_id) values ('NIVEL2', 'Nível 2 - Quebra-Cabeça', 3);
+
+insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '0');
+insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '1');
+insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', 'nivel 1', '2');
+insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', 'nivel 1', '3');
+
+insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 2', '1');
+insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 2', '2');
+insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', 'nivel 2', '3');
+insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', 'nivel 2', '4');
 
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 1, 2, 1);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 3, 4, 1);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 5, 6, 4);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 7, 8, 4);
+
 
 
 

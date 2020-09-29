@@ -34,14 +34,4 @@ public class MenuItem : MonoBehaviour
     public delegate void OnMouseOverItem(MenuItem item);
     public static event OnMouseOverItem OnMouseOverItemEventHandler;
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (OnMouseOverItemEventHandler != null)
-            {
-                OnMouseOverItemEventHandler(this);
-            }
-        }
-    }
 }
