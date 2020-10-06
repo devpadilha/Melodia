@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Nivel2.unity
     guid: a23580d24d7e8044db502a385a345a81
+  - enabled: 1
+    path: Assets/Scenes/Questionario.unity
+    guid: 45d4c5abddebdb643bab9e8a45d0ca6a
   m_configObjects: {}

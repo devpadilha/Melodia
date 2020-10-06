@@ -2,9 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GridManager2 : MonoBehaviour
 {
+    public Text errosHUD;
+    private int numErros;
     public Dictionary<int, Vector3> grid;
     private GameObject[] elementos;
     public GridItem2[] items;
@@ -44,6 +48,12 @@ public class GridManager2 : MonoBehaviour
         GridItem2.OnMouseOverItemEventHandler += MouseClick;
     }
 
+    private void DecrementarErros()
+    {
+        numErros = numErros - 1;
+        errosHUD.text = numErros.ToString();
+    }
+
     void MouseClick(GridItem2 item)
     {
         this.atual = item;
@@ -64,15 +74,29 @@ public class GridManager2 : MonoBehaviour
 
                 if (items[ultimo.Index].Valor.Equals(items[item.Index].Valor))
                 {
-                    Invoke(nameof(limparPecas), 1.5f);                    
+                    Invoke(nameof(limparPecas), 1.5f);
+                    partida.Acertos++;
                 }
                 else
                 {
+                    if(numErros == 0)
+                    {
+                        Invoke(nameof(EncerrarPartida), 1.5f);
+                    }
+                    partida.Erros++;
+                    DecrementarErros();
                     Invoke(nameof(resetarTabuleiro), 1.5f);
                 }
             }           
         }
 
+    }
+
+    private void EncerrarPartida()
+    {
+        partidaController.encerrarPartida(partida);
+        GridItem2.OnMouseOverItemEventHandler -= MouseClick;
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void limparPecas() 
@@ -99,10 +123,8 @@ public class GridManager2 : MonoBehaviour
 
 
         if (fgFim)
-        {            
-            GameObject[] reacoes = Resources.LoadAll<GameObject>("Reacoes");
-            GameObject elemento = reacoes[0];
-            items[0] = Instantiate(elemento, new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem2>();
+        {
+            Invoke(nameof(EncerrarPartida), 1.5f);
         }
     }
 
@@ -124,10 +146,12 @@ public class GridManager2 : MonoBehaviour
 
     private void CriarPartida()
     {
-        nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
-        print(nivel.Descricao);
 
+        nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
         partida = partidaController.criarPartida(usuario.Jogador, nivel, 2);
+
+        numErros = nivel.MaxErros;
+        errosHUD.text = numErros.ToString();
     }
 
     private void CreateGrid()

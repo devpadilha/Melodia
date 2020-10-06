@@ -17,8 +17,9 @@ public class PartidaModel
         Partida partida = null;
         JogadorController jogador = new JogadorController();
         NivelController nivel = new NivelController();
+        DesafioController desafioController = new DesafioController();
 
-        string query = "SELECT id, acertos, erros, concluido, jogador_id, nivel_id FROM partida WHERE id = @id";
+        string query = "SELECT id, acertos, erros, data_inicio, data_termino, jogador_id, nivel_id FROM partida WHERE id = @id";
         var param = new Dictionary<string, string>();
         param.Add("id", id.ToString());
         Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
@@ -30,9 +31,12 @@ public class PartidaModel
             partida.Id = Int32.Parse(retorno[0]);
             partida.Acertos = Int32.Parse(retorno[1]);
             partida.Erros = Int32.Parse(retorno[2]);
-            partida.Concluido = Boolean.Parse(retorno[3]);
-            partida.Jogador = jogador.get(Int32.Parse(retorno[4]));
-            partida.Nivel = nivel.get(Int32.Parse(retorno[5]));
+            partida.DataInicio = DateTime.Parse(retorno[3]);
+            if(retorno[4].Length > 0)
+                partida.DataTermino = DateTime.Parse(retorno[4]);
+            partida.Jogador = jogador.get(Int32.Parse(retorno[5]));
+            partida.Nivel = nivel.get(Int32.Parse(retorno[6]));
+            partida.Desafios = desafioController.getByPartida(partida);
         }
 
         return partida;
@@ -45,10 +49,10 @@ public class PartidaModel
         NivelController nivelController = new NivelController();
         DesafioController desafioController = new DesafioController();
 
-        string query = "SELECT id, acertos, erros, concluido, jogador_id, nivel_id FROM partida WHERE jogador_id = @id and concluido = @concluido ORDER BY nivel_id DESC, data DESC";
+        string query = "SELECT id, acertos, erros, data_inicio, data_termino, jogador_id, nivel_id FROM partida WHERE jogador_id = @id and data_termino is not null ORDER BY nivel_id DESC, data_inicio DESC";
         var param = new Dictionary<string, string>();
         param.Add("id", jogador.Id.ToString());
-        param.Add("concluido", "true");
+    
         Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
         if (retornos.Count > 0)
         {
@@ -58,9 +62,11 @@ public class PartidaModel
             partida.Id = Int32.Parse(retorno[0]);
             partida.Acertos = Int32.Parse(retorno[1]);
             partida.Erros = Int32.Parse(retorno[2]);
-            partida.Concluido = Boolean.Parse(retorno[3]);
-            partida.Jogador = jogadorController.get(Int32.Parse(retorno[4]));
-            partida.Nivel = nivelController.get(Int32.Parse(retorno[5]));
+            partida.DataInicio = DateTime.Parse(retorno[3]);
+            if (retorno[4].Length > 0)
+                partida.DataTermino = DateTime.Parse(retorno[4]);
+            partida.Jogador = jogadorController.get(Int32.Parse(retorno[5]));
+            partida.Nivel = nivelController.get(Int32.Parse(retorno[6]));
             partida.Desafios = desafioController.getByPartida(partida);
         }
 
@@ -74,13 +80,16 @@ public class PartidaModel
         NivelController nivelController = new NivelController();
         DesafioController desafioController = new DesafioController();
 
-        string query = "INSERT INTO partida (acertos, erros, jogador_id, nivel_id, concluido, data) VALUES ( @acertos, @erros, @jogador, @nivel, @concluido, julianday('now'))";
+        DateTime agora = DateTime.Now;
+
+
+        string query = "INSERT INTO partida (acertos, erros, jogador_id, nivel_id, data_inicio) VALUES ( @acertos, @erros, @jogador, @nivel, @dataInicio)";
         var param = new Dictionary<string, string>();
         param.Add("acertos", "0");
         param.Add("erros", "0");
         param.Add("jogador", jogador.Id.ToString());
         param.Add("nivel", nivel.Id.ToString());
-        param.Add("concluido", "false");
+        param.Add("dataInicio", dataBase.DateTimeSQLite(agora));
         int id = dataBase.Insert(query, param);
 
         partida = get(id);
@@ -88,5 +97,21 @@ public class PartidaModel
         partida.Desafios = desafioController.criarDesafios(partida, qtdeDesafios);
 
         return partida;
+    }
+
+    public void encerrarPartida(Partida partida)
+    {
+        DesafioController desafioController = new DesafioController();
+
+        DateTime agora = DateTime.Now;
+
+        string query = "UPDATE partida SET acertos = @acertos, erros = @erros, data_termino = @dataTermino WHERE id = @id";
+        var param = new Dictionary<string, string>();
+        param.Add("id", partida.Id.ToString());
+        param.Add("acertos", partida.Acertos.ToString());
+        param.Add("erros", partida.Erros.ToString());
+        param.Add("dataTermino", dataBase.DateTimeSQLite(agora));
+
+        int id = dataBase.Insert(query, param);
     }
 }

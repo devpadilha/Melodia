@@ -44,6 +44,7 @@ public class SceneUtil : MonoBehaviour
 
     public void Exit()
     {
+        Debug.Log("Saindo...");
         Application.Quit();
     }
 }

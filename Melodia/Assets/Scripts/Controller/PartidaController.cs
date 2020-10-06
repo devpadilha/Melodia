@@ -21,4 +21,9 @@
     {
         return model.criarPartida(jogador, nivel, qtdeDesafios);
     }
+
+    public void encerrarPartida(Partida partida)
+    {
+        model.encerrarPartida(partida);
+    }
 }

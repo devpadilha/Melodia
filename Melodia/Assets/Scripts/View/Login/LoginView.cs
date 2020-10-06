@@ -39,7 +39,6 @@ public class LoginView : MonoBehaviour
             sucesso = true;
             controller.setAtivo(login.Id);
         }
-        print(login.Usuario);
 
 
         return sucesso;

@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class Partida
 {
     private int id;
     private int acertos;
     private int erros;
-    private bool concluido;
+    private DateTime dataInicio;
+    private DateTime dataTermino;
     private Jogador jogador;
     private Nivel nivel;
     private List<Desafio> desafios;
@@ -46,15 +48,27 @@ public class Partida
         }
     }
 
-    public bool Concluido
+    public DateTime DataInicio
     {
         get
         {
-            return concluido;
+            return dataInicio;
         }
         set
         {
-            concluido = value;
+            dataInicio = value;
+        }
+    }
+
+    public DateTime DataTermino
+    {
+        get
+        {
+            return dataTermino;
+        }
+        set
+        {
+            dataTermino = value;
         }
     }
 

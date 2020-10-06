@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Controller\LoginController.cs" />
     <Compile Include="Assets\Scripts\Controller\NivelController.cs" />
     <Compile Include="Assets\Scripts\Controller\PartidaController.cs" />
+    <Compile Include="Assets\Scripts\Controller\QuestionarioController.cs" />
     <Compile Include="Assets\Scripts\Enum\DificuldadeEnum.cs" />
     <Compile Include="Assets\Scripts\Enum\NivelEnum.cs" />
     <Compile Include="Assets\Scripts\Model\DataBase.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\Model\LoginModel.cs" />
     <Compile Include="Assets\Scripts\Model\NivelModel.cs" />
     <Compile Include="Assets\Scripts\Model\PartidaModel.cs" />
+    <Compile Include="Assets\Scripts\Model\QuestionarioModel.cs" />
     <Compile Include="Assets\Scripts\Util\ObjectClicker.cs" />
     <Compile Include="Assets\Scripts\Util\RandomUtil.cs" />
     <Compile Include="Assets\Scripts\Util\SceneUtil.cs" />
@@ -89,6 +91,8 @@
     <Compile Include="Assets\Scripts\VO\Login.cs" />
     <Compile Include="Assets\Scripts\VO\Nivel.cs" />
     <Compile Include="Assets\Scripts\VO\Partida.cs" />
+    <Compile Include="Assets\Scripts\VO\Questionario.cs" />
+    <Compile Include="Assets\Scripts\VO\Resposta.cs" />
     <Compile Include="Assets\Scripts\View\Cadastro\DropDownNascimento.cs" />
     <Compile Include="Assets\Scripts\View\Login\LoginView.cs" />
     <Compile Include="Assets\Scripts\View\MainMenu\MenuItem.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Assets\Scripts\View\Nivel1\GridManager.cs" />
     <Compile Include="Assets\Scripts\View\Nivel2\GridItem2.cs" />
     <Compile Include="Assets\Scripts\View\Nivel2\GridManager2.cs" />
+    <Compile Include="Assets\Scripts\View\Questionario\QuestionarioManagement.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

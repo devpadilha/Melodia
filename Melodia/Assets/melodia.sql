@@ -23,6 +23,7 @@ create table nivel(
     id integer primary key,
     nome varchar(20),
     descricao varchar(140),
+    max_erros integer,
     dificuldade_id integer,
     foreign key (dificuldade_id) references dificuldade(id)
 );
@@ -31,8 +32,8 @@ create table partida(
     id integer primary key,
     acertos integer,
     erros integer,
-    concluido boolean default false,
-    data real,
+    data_inicio varchar(50),
+    data_termino varchar(50),
     jogador_id integer,
     nivel_id integer,
     foreign key (jogador_id) references  jogador(id),
@@ -65,6 +66,38 @@ create table partida_desafio(
   foreign key (desafio_id) references desafio(id)
 );
 
+create table questionario(
+  id integer primary key,
+  pergunta varchar(140),
+  opcoes varchar(50),
+  nivel_id integer,
+  foreign key (nivel_id) references nivel(id)
+);
+
+create table questionario_resposta(
+  id integer primary key,
+  resposta varchar(10),
+  pergunta_id integer,
+  jogador_id integer,
+  foreign key (pergunta_id) references  questionario(id),
+  foreign key (jogador_id) references  jogador(id)
+);
+
+insert into questionario (pergunta, opcoes, nivel_id) values
+('Você gosta de música?', 'Sim;Não;', 1),
+('Você sabe o que é uma clave?', 'Sim;Não;', 1),
+('A clave de sol e a clave de fá têm o mesmo desenho?', 'Sim;Não;', 1),
+('Você sabe o que é uma mínima?', 'Sim;Não;', 1),
+('Você sabe o que é uma semínima?', 'Sim;Não;', 1),
+('Você sabe a diferença entre harmonia e melodia?', 'Sim;Não;', 1);
+
+insert into questionario (pergunta, opcoes, nivel_id) values
+('Você sabe a diferença entre mínima e semínima?', 'Sim;Não;', 4),
+('Você sabe a diferença entre colcheia e semicolcheia?', 'Sim;Não;', 4),
+('Você conhece o formato da semibreve?', 'Sim;Não;', 4),
+('Você sabe a diferença entre a clave de sol e a clave de fá?', 'Sim;Não;', 4),
+('Harmonia e melodia são iguais?', 'Sim;Não;', 4);
+
 insert into dificuldade (nome, descricao) values ('FÁCIL', '');
 insert into dificuldade (nome, descricao) values ('MÉDIO', '');
 insert into dificuldade (nome, descricao) values ('DIFÍCIL', '');
@@ -89,6 +122,10 @@ insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', 'nivel 2
 
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 1, 2, 1);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 3, 4, 1);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 1, 2, 2);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 3, 4, 2);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 1, 2, 3);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 3, 4, 3);
 
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 5, 6, 4);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('', 7, 8, 4);
