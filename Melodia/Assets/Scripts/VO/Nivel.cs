@@ -4,6 +4,7 @@
     private string nome;
     private string descricao;
     private int maxErros;
+    private int minAcertos;
     private Dificuldade dificuldade;
 
     public int Id
@@ -51,6 +52,18 @@
         set
         {
             maxErros = value;
+        }
+    }
+
+    public int MinAcertos
+    {
+        get
+        {
+            return minAcertos;
+        }
+        set
+        {
+            minAcertos = value;
         }
     }
 

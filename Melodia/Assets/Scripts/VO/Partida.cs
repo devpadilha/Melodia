@@ -6,6 +6,7 @@ public class Partida
     private int id;
     private int acertos;
     private int erros;
+    private bool concluido;
     private DateTime dataInicio;
     private DateTime dataTermino;
     private Jogador jogador;
@@ -45,6 +46,18 @@ public class Partida
         set
         {
             erros = value;
+        }
+    }
+
+    public bool Concluido
+    {
+        get
+        {
+            return concluido;
+        }
+        set
+        {
+            concluido = value;
         }
     }
 

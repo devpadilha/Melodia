@@ -44,7 +44,6 @@ public class QuestionarioModel
 
     public bool isRespondido(string nivel, Jogador jogador)
     {
-        Questionario pergunta = null;
         List<Questionario> questionario = new List<Questionario>();
         NivelController nivelController = new NivelController();
 

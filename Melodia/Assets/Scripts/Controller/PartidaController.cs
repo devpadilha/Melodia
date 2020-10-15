@@ -17,6 +17,11 @@
         return model.getUltima(jogador);
     }
 
+    public Partida getAtual(Jogador jogador, string nivel)
+    {
+        return model.getAtual(jogador, nivel);
+    }
+
     public Partida criarPartida(Jogador jogador, Nivel nivel, int qtdeDesafios)
     {
         return model.criarPartida(jogador, nivel, qtdeDesafios);

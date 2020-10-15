@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\VO\Questionario.cs" />
     <Compile Include="Assets\Scripts\VO\Resposta.cs" />
     <Compile Include="Assets\Scripts\View\Cadastro\DropDownNascimento.cs" />
+    <Compile Include="Assets\Scripts\View\Hud\ItemHud.cs" />
     <Compile Include="Assets\Scripts\View\Login\LoginView.cs" />
     <Compile Include="Assets\Scripts\View\MainMenu\MenuItem.cs" />
     <Compile Include="Assets\Scripts\View\MainMenu\MenuManager.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\Scripts\View\Nivel1\GridManager.cs" />
     <Compile Include="Assets\Scripts\View\Nivel2\GridItem2.cs" />
     <Compile Include="Assets\Scripts\View\Nivel2\GridManager2.cs" />
+    <Compile Include="Assets\Scripts\View\NivelCompleto\ItemGridNC.cs" />
     <Compile Include="Assets\Scripts\View\Questionario\QuestionarioManagement.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class GridManager2 : MonoBehaviour
 {
-    public Text errosHUD;
     private int numErros;
     public Dictionary<int, Vector3> grid;
     private GameObject[] elementos;
@@ -19,6 +18,8 @@ public class GridManager2 : MonoBehaviour
     private Partida ultimaPartida;
     private Partida partida;
     private Nivel nivel;
+    public ItemHud[] huds;
+    public ItemHud[] vidas;
 
     private LoginController loginController;
     private PartidaController partidaController;
@@ -44,6 +45,7 @@ public class GridManager2 : MonoBehaviour
         montaGrid();
         GetElementos();
         CreateGrid();
+        CriarHUD();
 
         GridItem2.OnMouseOverItemEventHandler += MouseClick;
     }
@@ -51,7 +53,10 @@ public class GridManager2 : MonoBehaviour
     private void DecrementarErros()
     {
         numErros = numErros - 1;
-        errosHUD.text = numErros.ToString();
+        Debug.Log(numErros);
+
+        Destroy(vidas[vidas.Length - 1].gameObject);
+        Array.Resize(ref vidas, vidas.Length - 1);
     }
 
     void MouseClick(GridItem2 item)
@@ -79,12 +84,13 @@ public class GridManager2 : MonoBehaviour
                 }
                 else
                 {
-                    if(numErros == 0)
+                    
+                    DecrementarErros();
+                    if (numErros == 0)
                     {
                         Invoke(nameof(EncerrarPartida), 1.5f);
                     }
                     partida.Erros++;
-                    DecrementarErros();
                     Invoke(nameof(resetarTabuleiro), 1.5f);
                 }
             }           
@@ -92,11 +98,66 @@ public class GridManager2 : MonoBehaviour
 
     }
 
+    private void CriarHUD()
+    {
+        GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
+        huds = new ItemHud[6];
+
+        huds[0] = Instantiate(icones[0], new Vector3(4, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[0].create("MENU", "0");
+
+        huds[1] = Instantiate(icones[1], new Vector3(8, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[1].create("SAIR", "1");
+
+        if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
+        {
+            huds[2] = Instantiate(icones[3], new Vector3(-8, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+        }
+        else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
+        {
+            huds[2] = Instantiate(icones[3], new Vector3(-8, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+            huds[3] = Instantiate(icones[3], new Vector3(-7, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+        }
+        else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+        {
+            huds[2] = Instantiate(icones[3], new Vector3(-8, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+            huds[4] = Instantiate(icones[3], new Vector3(-7, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+            huds[5] = Instantiate(icones[3], new Vector3(-6, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+        }
+
+
+        Dictionary<int, Vector3> gridVidas = new Dictionary<int, Vector3>();
+        gridVidas.Add(0, new Vector3(-8, 4));
+        gridVidas.Add(1, new Vector3(-7, 4));
+        gridVidas.Add(2, new Vector3(-6, 4));
+        gridVidas.Add(3, new Vector3(-5, 4));
+        gridVidas.Add(4, new Vector3(-4, 4));
+        vidas = new ItemHud[numErros];
+        for (int i = 0; i < numErros; i++)
+        {
+            vidas[i] = Instantiate(icones[2], gridVidas[i], Quaternion.identity).GetComponent<ItemHud>();
+        }
+    }
+
     private void EncerrarPartida()
     {
+        if (partida.Acertos >= nivel.MinAcertos)
+        {
+            partida.Concluido = true;
+        }
+
         partidaController.encerrarPartida(partida);
         GridItem2.OnMouseOverItemEventHandler -= MouseClick;
-        SceneManager.LoadScene("MainMenu");
+
+        if (partida.Acertos >= nivel.MinAcertos)
+        {
+            SceneManager.LoadScene("NivelCompleto");
+        }
+        else
+        {
+            SceneManager.LoadScene("NivelFracasso");
+        }
+
     }
 
     private void limparPecas() 
@@ -146,17 +207,36 @@ public class GridManager2 : MonoBehaviour
 
     private void CriarPartida()
     {
+        partida = partidaController.getAtual(usuario.Jogador, NivelEnum.Nivel.NIVEL2.ToString());
 
-        nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
-        partida = partidaController.criarPartida(usuario.Jogador, nivel, 2);
+        if (partida == null)
+        {
+            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
+
+            if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
+            {
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 2);
+            }
+            else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
+            {
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 3);
+            }
+            else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+            {
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 4);
+            }
+        }
+        else
+        {
+            nivel = partida.Nivel;
+        }
 
         numErros = nivel.MaxErros;
-        errosHUD.text = numErros.ToString();
     }
 
     private void CreateGrid()
     {
-        RandomUtil randNum = new RandomUtil(0, 4);
+        
         int rand;
 
         List<Desafio> desafios = partida.Desafios;
@@ -172,7 +252,7 @@ public class GridManager2 : MonoBehaviour
 
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
         {
-            
+            RandomUtil randNum = new RandomUtil(0, 4);
             items = new GridItem2[4];
             itemsQ = new GridItem2[4];
            
@@ -183,6 +263,70 @@ public class GridManager2 : MonoBehaviour
             items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
 
             desafio = desafios[1];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            for (int i = 0; i < itemsQ.Length; i++)
+            {
+                itemsQ[i] = InstantiateElemento(valor: "DESCONHECIDO", resource: "0", posicao: grid[i], true, i);
+            }
+        }
+        else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
+        {
+            RandomUtil randNum = new RandomUtil(0, 6);
+            items = new GridItem2[6];
+            itemsQ = new GridItem2[6];
+
+            Desafio desafio = desafios[0];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            desafio = desafios[1];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            desafio = desafios[2];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            for (int i = 0; i < itemsQ.Length; i++)
+            {
+                itemsQ[i] = InstantiateElemento(valor: "DESCONHECIDO", resource: "0", posicao: grid[i], true, i);
+            }
+        }
+        else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+        {
+            RandomUtil randNum = new RandomUtil(0, 8);
+            items = new GridItem2[8];
+            itemsQ = new GridItem2[8];
+
+            Desafio desafio = desafios[0];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            desafio = desafios[1];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            desafio = desafios[2];
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
+            rand = randNum.get();
+            items[rand] = InstantiateElemento(valor: desafio.Resposta.Nome, resource: desafio.Resposta.Resource, posicao: grid[rand], false, rand);
+
+            desafio = desafios[3];
             rand = randNum.get();
             items[rand] = InstantiateElemento(valor: desafio.Pergunta.Nome, resource: desafio.Pergunta.Resource, posicao: grid[rand], false, rand);
             rand = randNum.get();
@@ -213,14 +357,14 @@ public class GridManager2 : MonoBehaviour
     private void montaGrid()
     {
         grid = new Dictionary<int, Vector3>();
-        grid.Add(0, new Vector3(-1, 0));
-        grid.Add(1, new Vector3(1, 0));
-        grid.Add(2, new Vector3(-1, -2));
-        grid.Add(3, new Vector3(1, -2));
-        grid.Add(4, new Vector3(-3, 0));
-        grid.Add(5, new Vector3(-3, -2));
-        grid.Add(6, new Vector3(3, 0));
-        grid.Add(7, new Vector3(3, -2));      
+        grid.Add(0, new Vector3(-1.5f, 1));
+        grid.Add(1, new Vector3(1.5f, 1));
+        grid.Add(2, new Vector3(-1.5f, -2));
+        grid.Add(3, new Vector3(1.5f, -2));
+        grid.Add(4, new Vector3(-4.5f, 1));
+        grid.Add(5, new Vector3(-4.5f, -2));
+        grid.Add(6, new Vector3(4.5f, 1));
+        grid.Add(7, new Vector3(4.5f, -2));      
         
     }
 }

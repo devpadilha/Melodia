@@ -17,7 +17,7 @@ public class NivelModel
         Nivel nivel = null;
         DificuldadeController dificuldade = new DificuldadeController();
 
-        string query = "SELECT id, nome, descricao, max_erros, dificuldade_id FROM nivel WHERE id = @id";
+        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id FROM nivel WHERE id = @id";
         var param = new Dictionary<string, string>();
         param.Add("id", id.ToString());
         Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
@@ -30,7 +30,8 @@ public class NivelModel
             nivel.Nome = retorno[1];
             nivel.Descricao = retorno[2];
             nivel.MaxErros = Int32.Parse(retorno[3]);
-            nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[4]));
+            nivel.MinAcertos = Int32.Parse(retorno[4]);
+            nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[5]));
         }
 
         return nivel;
@@ -41,7 +42,7 @@ public class NivelModel
         Nivel nivel = null;
         DificuldadeController dificuldade = new DificuldadeController();
 
-        string query = "SELECT id, nome, descricao, max_erros, dificuldade_id FROM nivel WHERE nome = @nome AND dificuldade_id = @dificuldade";
+        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id FROM nivel WHERE nome = @nome AND dificuldade_id = @dificuldade";
         var param = new Dictionary<string, string>();
         
         if(ultimaPartida == null || !ultimaPartida.Nivel.Nome.Equals(nivelNome.ToUpper()))
@@ -71,7 +72,8 @@ public class NivelModel
             nivel.Nome = retorno[1];
             nivel.Descricao = retorno[2];
             nivel.MaxErros = Int32.Parse(retorno[3]);
-            nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[4]));
+            nivel.MinAcertos = Int32.Parse(retorno[4]);
+            nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[5]));
         }
 
         return nivel;

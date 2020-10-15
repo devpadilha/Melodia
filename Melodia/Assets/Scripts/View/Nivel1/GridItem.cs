@@ -25,6 +25,7 @@ public class GridItem : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log(this.comportamento);
         if (OnMouseOverItemEventHandler != null)
         {
             OnMouseOverItemEventHandler(this);
