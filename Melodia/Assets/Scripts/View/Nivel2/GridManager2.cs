@@ -26,6 +26,11 @@ public class GridManager2 : MonoBehaviour
     private NivelController nivelController;
     private ElementoController elementoController;
 
+    private bool fgClick;
+
+    private AudioSource source;
+    public AudioClip clip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +38,8 @@ public class GridManager2 : MonoBehaviour
         partidaController = new PartidaController();
         nivelController = new NivelController();
         elementoController = new ElementoController();
+
+        source = GetComponent<AudioSource>();
 
         usuario = loginController.getAtivo();
 
@@ -47,6 +54,7 @@ public class GridManager2 : MonoBehaviour
         CreateGrid();
         CriarHUD();
 
+        fgClick = true;
         GridItem2.OnMouseOverItemEventHandler += MouseClick;
     }
 
@@ -61,39 +69,48 @@ public class GridManager2 : MonoBehaviour
 
     void MouseClick(GridItem2 item)
     {
-        this.atual = item;
-        
-        if(ultimo==null || ultimo.Index != item.Index) {
-            
-            if (ultimo == null)
-            {
-                ultimo = item;
-                items[item.Index].Rend.enabled = true;
-                itemsQ[item.Index].Rend.enabled = false;            
-            }
-            else
-            {
-                items[item.Index].Rend.enabled = true;
-                itemsQ[item.Index].Rend.enabled = false;
-                
+        if (fgClick)
+        {
+            fgClick = false;
+            source.PlayOneShot(clip);
 
-                if (items[ultimo.Index].Valor.Equals(items[item.Index].Valor))
+            this.atual = item;
+
+            if (ultimo == null || ultimo.Index != item.Index)
+            {
+
+                if (ultimo == null)
                 {
-                    Invoke(nameof(limparPecas), 1.5f);
-                    partida.Acertos++;
+                    ultimo = item;
+                    items[item.Index].Rend.enabled = true;
+                    itemsQ[item.Index].Rend.enabled = false;
+                    fgClick = true;
                 }
                 else
                 {
-                    
-                    DecrementarErros();
-                    if (numErros == 0)
+                    items[item.Index].Rend.enabled = true;
+                    itemsQ[item.Index].Rend.enabled = false;
+
+
+                    if (items[ultimo.Index].Valor.Equals(items[item.Index].Valor))
                     {
-                        Invoke(nameof(EncerrarPartida), 1.5f);
+                        Invoke(nameof(limparPecas), 1.5f);
+                        partida.Acertos++;
                     }
-                    partida.Erros++;
-                    Invoke(nameof(resetarTabuleiro), 1.5f);
+                    else
+                    {
+
+                        DecrementarErros();
+                        partida.Erros++;
+                        if (numErros == 0)
+                        {
+                            Invoke(nameof(EncerrarPartida), 1.5f);
+                        }                        
+                        Invoke(nameof(resetarTabuleiro), 1.5f);
+                    }
                 }
-            }           
+            }
+            
         }
 
     }
@@ -103,10 +120,10 @@ public class GridManager2 : MonoBehaviour
         GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
         huds = new ItemHud[6];
 
-        huds[0] = Instantiate(icones[0], new Vector3(4, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[0] = Instantiate(icones[0], new Vector3(2, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[0].create("MENU", "0");
 
-        huds[1] = Instantiate(icones[1], new Vector3(8, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[1] = Instantiate(icones[1], new Vector3(6, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[1].create("SAIR", "1");
 
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
@@ -157,7 +174,7 @@ public class GridManager2 : MonoBehaviour
         {
             SceneManager.LoadScene("NivelFracasso");
         }
-
+        fgClick = true;
     }
 
     private void limparPecas() 
@@ -187,6 +204,7 @@ public class GridManager2 : MonoBehaviour
         {
             Invoke(nameof(EncerrarPartida), 1.5f);
         }
+        fgClick = true;
     }
 
     private void resetarTabuleiro()
@@ -201,6 +219,7 @@ public class GridManager2 : MonoBehaviour
                 itemsQ[i].Rend.enabled = true;
             }
         }
+        fgClick = true;
     }
 
 
@@ -215,15 +234,15 @@ public class GridManager2 : MonoBehaviour
 
             if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
             {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 2);
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 1);
             }
             else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
             {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 3);
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 1);
             }
             else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
             {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 4);
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 1);
             }
         }
         else

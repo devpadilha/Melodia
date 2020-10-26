@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,19 +22,26 @@ public class SceneUtil : MonoBehaviour
     
     private void backgroudScale()
     {
-        SpriteRenderer grafico = GetComponent<SpriteRenderer>();
-
-        if (grafico != null)
+        try
         {
-            float larguraImagem = grafico.sprite.bounds.size.x;
-            float alturaImagem = grafico.sprite.bounds.size.y;
-            float alturaTela = Camera.main.orthographicSize * 2f;
-            float larguraTela = alturaTela / Screen.height * Screen.width;
+            SpriteRenderer grafico = GetComponent<SpriteRenderer>();
 
-            Vector2 novaEscala = transform.localScale;
-            novaEscala.x = larguraTela / larguraImagem + 0.25f;
-            novaEscala.y = alturaTela / alturaImagem;
-            transform.localScale = novaEscala;
+            if (grafico != null)
+            {
+                float larguraImagem = grafico.sprite.bounds.size.x;
+                float alturaImagem = grafico.sprite.bounds.size.y;
+                float alturaTela = Camera.main.orthographicSize * 2f;
+                float larguraTela = alturaTela / Screen.height * Screen.width;
+
+                Vector2 novaEscala = transform.localScale;
+                novaEscala.x = larguraTela / larguraImagem + 0.25f;
+                novaEscala.y = alturaTela / alturaImagem;
+                transform.localScale = novaEscala;
+            }
+        }
+        catch(Exception e)
+        {
+            //do nothing;
         }
     }
 

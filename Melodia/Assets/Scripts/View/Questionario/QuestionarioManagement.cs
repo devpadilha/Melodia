@@ -18,6 +18,7 @@ public class QuestionarioManagement : MonoBehaviour
     private PartidaController partidaController;
     private NivelController nivelController;
     private int index;
+    private bool fgClick;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +52,7 @@ public class QuestionarioManagement : MonoBehaviour
         montaQuestionario();
 
         index = 0;
+        fgClick = true;
     }
 
     // Update is called once per frame
@@ -61,35 +63,41 @@ public class QuestionarioManagement : MonoBehaviour
 
     private void ToggleClick()
     {
-        Resposta resposta = new Resposta();
+        if (fgClick)
+        {
+            fgClick = false;
+            Resposta resposta = new Resposta();
 
-        resposta.Questionario = questionario[index];
-        resposta.Jogador = usuario.Jogador;
+            resposta.Questionario = questionario[index];
+            resposta.Jogador = usuario.Jogador;
 
-        if (op1.isOn)
-        {
-            resposta.Opcao = "Sim";
+            if (op1.isOn)
+            {
+                resposta.Opcao = "Sim";
 
-        }
-        else if (op2.isOn)
-        {
-            resposta.Opcao = "Não";
-        }
-        else
-        {
-            return;
-        }
-    
+            }
+            else if (op2.isOn)
+            {
+                resposta.Opcao = "Não";
+            }
+            else
+            {
+                fgClick = true;
+                return;
+            }
 
-        questionarioController.insertResposta(resposta);
-        index++;
-        if(index < questionario.ToArray().Length)
-        {
-            Invoke("montaQuestionario", 1f);
-        }
-        else
-        {
-            SceneManager.LoadScene("MainMenu");
+
+            questionarioController.insertResposta(resposta);
+            index++;
+            if (index < questionario.ToArray().Length)
+            {
+                Invoke("montaQuestionario", 0.5f);
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+            
         }
     }
 
@@ -109,5 +117,6 @@ public class QuestionarioManagement : MonoBehaviour
         */
         op1.isOn = false;
         op2.isOn = false;
+        fgClick = true;
     }
 }

@@ -10,6 +10,9 @@ public class MenuManager : MonoBehaviour
     private LoginController loginController;
     private PartidaController partidaController;
     private QuestionarioController questionarioController;
+    private AudioSource source;
+    public AudioClip clip;
+    private string nextScene;
 
     public GameObject[] items;
     // Start is called before the first frame update
@@ -19,25 +22,37 @@ public class MenuManager : MonoBehaviour
         partidaController = new PartidaController();
         questionarioController = new QuestionarioController();
 
+        source = GetComponent<AudioSource>();
+
         usuario = loginController.getAtivo();
         ultimaPartida = partidaController.getUltima(usuario.Jogador);
 
         carregarItems();
         carregarItensMenu();
         MenuItem.OnMouseOverItemEventHandler += MouseClick;
+        
     }
 
     void MouseClick(MenuItem item)
     {
-        if(questionarioController.isRespondido(item.Nivel, usuario.Jogador))
+        source.PlayOneShot(clip);
+        if (questionarioController.isRespondido(item.Nivel, usuario.Jogador))
         {
-            SceneManager.LoadScene(item.Nivel);      
+            nextScene = item.Nivel;
+            Invoke(nameof(carregarCena), 0.5f);
         }
         else
         {
-            SceneManager.LoadScene("Questionario");
+            nextScene = "Questionario";
+            Invoke(nameof(carregarCena), 0.5f);
         }
         
+    }
+
+    private void carregarCena()
+    {
+        MenuItem.OnMouseOverItemEventHandler -= MouseClick;
+        SceneManager.LoadScene(nextScene);
     }
 
     private void carregarItensMenu()

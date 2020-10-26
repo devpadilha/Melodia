@@ -94,7 +94,10 @@ public class DesafioModel
         Desafio desafio = new Desafio();
         desafio.Id = Int32.Parse(retorno[0]);
         desafio.Descricao = retorno[1];
-        desafio.Pergunta = elemento.get(Int32.Parse(retorno[2]));
+        if (retorno[2].Length > 0)
+        {
+            desafio.Pergunta = elemento.get(Int32.Parse(retorno[2]));
+        }
         desafio.Resposta = elemento.get(Int32.Parse(retorno[3]));
         desafio.Nivel = nivel.get(Int32.Parse(retorno[4]));
 

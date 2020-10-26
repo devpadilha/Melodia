@@ -7,11 +7,20 @@ using System.Collections.Generic;
 public class DataBase
 {
     private string database = "melodia_database.db";
-    private string connectionString; 
+    private string connectionString;
+    private string pathSQL;
 
     public DataBase()
     {
         this.connectionString = "URI=file:" + Application.dataPath + "/" + database;
+        this.pathSQL = Application.streamingAssetsPath + "/melodia.sql";
+        IniciarBase();
+    }
+
+    public Dictionary<int, List<string>> Select(string query)
+    {
+        Dictionary<string, string> param = new Dictionary<string, string>();
+        return Select(query, param);
     }
 
 
@@ -88,6 +97,39 @@ public class DataBase
     {
         string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
         return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
+    }
+
+    private void IniciarBase()
+    {
+        string sql = System.IO.File.ReadAllText(@pathSQL);
+
+        Dictionary<int, List<string>> retorno = Select("SELECT name FROM sqlite_master WHERE type='table' AND name='login';");
+
+        if(retorno.Count == 0)
+        {
+            
+            using (var connection = new SqliteConnection(this.connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+
+                        command.CommandText = sql;
+                        command.CommandType = CommandType.Text;
+
+                        command.Transaction = transaction;
+
+                        command.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                }
+            }
+            Debug.Log("Banco Iniciado");
+        }
+
+        
     }
 
 }

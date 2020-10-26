@@ -27,6 +27,9 @@ public class GridManager : MonoBehaviour
     private NivelController nivelController;
     private ElementoController elementoController;
 
+    private AudioSource source;
+    public AudioClip clip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,8 @@ public class GridManager : MonoBehaviour
         partidaController = new PartidaController();
         nivelController = new NivelController();
         elementoController = new ElementoController();
+
+        source = GetComponent<AudioSource>();
 
         usuario = loginController.getAtivo();
 
@@ -45,11 +50,11 @@ public class GridManager : MonoBehaviour
 
         montaGrid();
         GetElementos();
-        //CreateGridTreinamento();
-        CreateGrid();
+        CreateGridTreinamento();
+        //CreateGrid();
         CriarHUD();
         fgClick = true;
-        GridItem.OnMouseOverItemEventHandler += MouseClick;
+        GridItem.OnMouseOverItemEventHandler += MouseClick;        
     }
 
     private void DecrementarErros()
@@ -83,10 +88,10 @@ public class GridManager : MonoBehaviour
         GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
         huds = new ItemHud[6];
 
-        huds[0] = Instantiate(icones[0], new Vector3( 4, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[0] = Instantiate(icones[0], new Vector3( 2, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[0].create("MENU", "0");
 
-        huds[1] = Instantiate(icones[1], new Vector3(8, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[1] = Instantiate(icones[1], new Vector3(6, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[1].create("SAIR", "1");
 
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
@@ -201,6 +206,7 @@ public class GridManager : MonoBehaviour
 
             items[5] = InstantiateElemento(Comportamento.RESPOSTAERRADA, respostasErradas[2].Resource, grid[rand]);
         }
+        fgClick = true;
     }
 
     private void CreateGridTreinamento()
@@ -222,6 +228,7 @@ public class GridManager : MonoBehaviour
         items[1] = InstantiateElemento(Comportamento.PERGUNTA, desafio.Pergunta.Resource, grid[0]);
         items[2] = InstantiateElemento(Comportamento.RESPOSTACERTA, desafio.Resposta.Resource, grid[1]);
         items[3] = InstantiateElemento(Comportamento.TREINAMENTONEXT, "1", grid[6]);
+        fgClick = true;
     }
 
     GridItem InstantiateElemento(Comportamento comportamento, string resource, Vector3 posicao)
@@ -248,7 +255,7 @@ public class GridManager : MonoBehaviour
         grid.Add(3, new Vector3(4, 2));               
         grid.Add(4, new Vector3(4, -4));
         grid.Add(5, new Vector3(-2, -1));
-        grid.Add(6, new Vector3(9, -1));
+        grid.Add(6, new Vector3(8, -1));
     }    
                                                                                                                                                                                                                                                                                                                                              
     void MouseClick(GridItem item)
@@ -261,6 +268,7 @@ public class GridManager : MonoBehaviour
             if (item.Comportamento.Equals(Comportamento.RESPOSTACERTA.ToString()))
             {
 
+                source.PlayOneShot(clip);
                 for (int i = 0; i < items.Length; i++)
                 {
                     if (items[i] != null)
@@ -289,6 +297,7 @@ public class GridManager : MonoBehaviour
             else if (item.Comportamento.Equals(Comportamento.RESPOSTAERRADA.ToString()))
             {
 
+                source.PlayOneShot(clip);
                 DecrementarErros();
                 if (numErros == 0)
                 {
@@ -309,6 +318,7 @@ public class GridManager : MonoBehaviour
             }
             else if (item.Comportamento.Equals(Comportamento.TREINAMENTONEXT.ToString()))
             {
+                source.PlayOneShot(clip);
                 index++;
                 if (index < partida.Desafios.ToArray().Length)
                 {
@@ -320,7 +330,7 @@ public class GridManager : MonoBehaviour
                     Invoke(nameof(CreateGrid), 0.5f);
                 }
             }
-            fgClick = true;
+           
         }
         
     }
