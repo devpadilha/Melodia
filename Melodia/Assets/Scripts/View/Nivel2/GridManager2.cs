@@ -163,6 +163,8 @@ public class GridManager2 : MonoBehaviour
             partida.Concluido = true;
         }
 
+        Debug.Log(partida.Acertos + " - " + nivel.MinAcertos);
+
         partidaController.encerrarPartida(partida);
         GridItem2.OnMouseOverItemEventHandler -= MouseClick;
 
@@ -234,15 +236,15 @@ public class GridManager2 : MonoBehaviour
 
             if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
             {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 1);
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 2);
             }
             else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
             {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 1);
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 3);
             }
             else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
             {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 1);
+                partida = partidaController.criarPartida(usuario.Jogador, nivel, 4);
             }
         }
         else

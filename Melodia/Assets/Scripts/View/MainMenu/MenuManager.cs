@@ -73,6 +73,20 @@ public class MenuManager : MonoBehaviour
             newItem = Instantiate(item, new Vector3(-3, -2.5f), Quaternion.identity).GetComponent<MenuItem>();
             newItem.create("Nivel2", "1");
         }
+
+        if (ultimaPartida != null && (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper()) || (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL2.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))))
+        {
+            item = items[1];
+            newItem = Instantiate(item, new Vector3(-1, -2f), Quaternion.identity).GetComponent<MenuItem>();
+            newItem.create("Nivel3", "1");
+        }
+
+        if (ultimaPartida != null && (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL4.ToString().ToUpper()) || (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))))
+        {
+            item = items[1];
+            newItem = Instantiate(item, new Vector3(1, -1.5f), Quaternion.identity).GetComponent<MenuItem>();
+            newItem.create("Nivel4", "1");
+        }
     }
 
     private void carregarItems()
