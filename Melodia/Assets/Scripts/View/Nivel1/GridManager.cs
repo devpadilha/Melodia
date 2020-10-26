@@ -225,8 +225,8 @@ public class GridManager : MonoBehaviour
         items = new GridItem[4];
 
         items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
-        items[1] = InstantiateElemento(Comportamento.PERGUNTA, desafio.Pergunta.Resource, grid[0]);
-        items[2] = InstantiateElemento(Comportamento.RESPOSTACERTA, desafio.Resposta.Resource, grid[1]);
+        items[1] = InstantiateElemento(Comportamento.NENHUM, desafio.Pergunta.Resource, grid[0]);
+        items[2] = InstantiateElemento(Comportamento.NENHUM, desafio.Resposta.Resource, grid[1]);
         items[3] = InstantiateElemento(Comportamento.TREINAMENTONEXT, "1", grid[6]);
         fgClick = true;
     }
