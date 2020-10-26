@@ -6,6 +6,7 @@
         NIVEL2,
         NIVEL3,
         NIVEL4,
-        NIVEL5
+        NIVEL5,
+        NIVEL6
     }
 }

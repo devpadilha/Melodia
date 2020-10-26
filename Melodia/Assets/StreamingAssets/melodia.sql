@@ -101,11 +101,16 @@ insert into questionario (pergunta, opcoes, nivel_id) values
 ('5. Harmonia e melodia são iguais?', 'Sim;Não;', 4);
 
 insert into questionario (pergunta, opcoes, nivel_id) values
-('1. Você sabe a diferença entre mínima e semínima?', 'Sim;Não;', 7),
-('2. Você sabe a diferença entre colcheia e semicolcheia?', 'Sim;Não;', 7),
-('3. Você conhece o formato da semibreve?', 'Sim;Não;', 7),
-('4. Você sabe a diferença entre a clave de sol e a clave de fá?', 'Sim;Não;', 7),
-('5. Harmonia e melodia são iguais?', 'Sim;Não;', 7);
+('1. A mínima e semínima têm o mesmo formato?', 'Sim;Não;', 7),
+('2. Você sabe a diferença entre semibreve e semínima?', 'Sim;Não;', 7),
+('3. Você sabe quantas linhas tem a pauta?', 'Sim;Não;', 7),
+('4. Duas colcheias são iguais a duas semínimas?', 'Sim;Não;', 7);
+
+insert into questionario (pergunta, opcoes, nivel_id) values
+('1. A escala musical é um conjunto de notas musicais?', 'Sim;Não;', 10),
+('2. A escala musical é formada por 7 notas?', 'Sim;Não;', 10),
+('3. Fi é uma nota musical?', 'Sim;Não;', 10),
+('4. Ré é uma nota musical?', 'Sim;Não;', 10);
 
 insert into dificuldade (nome, descricao) values ('FÁCIL', '');
 insert into dificuldade (nome, descricao) values ('MÉDIO', '');

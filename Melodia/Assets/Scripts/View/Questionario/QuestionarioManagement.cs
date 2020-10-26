@@ -41,6 +41,16 @@ public class QuestionarioManagement : MonoBehaviour
             nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
             questionario = questionarioController.getByNivel(nivel);
         }
+        if (ultimaPartida != null && ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL2.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+        {
+            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL3.ToString(), ultimaPartida);
+            questionario = questionarioController.getByNivel(nivel);
+        }
+        if (ultimaPartida != null && ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+        {
+            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL4.ToString(), ultimaPartida);
+            questionario = questionarioController.getByNivel(nivel);
+        }
 
         op1.isOn = false;
         op2.isOn = false;
