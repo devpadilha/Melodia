@@ -48,10 +48,11 @@ public class GridManager4 : MonoBehaviour
 
         index = 0;
 
+        items = new GridItem4[10];
+
         montaGrid();
         GetElementos();
-        CreateGridTreinamento();
-        //CreateGrid();
+        IniciarTreinamento();
         CriarHUD();
         fgClick = true;
         GridItem4.OnMouseOverItemEventHandler += MouseClick;
@@ -145,7 +146,6 @@ public class GridManager4 : MonoBehaviour
         {
             RandomUtil randNum = new RandomUtil(1, 3);
             List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 1);
-            items = new GridItem4[4];
 
             items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
 
@@ -163,8 +163,7 @@ public class GridManager4 : MonoBehaviour
         {
             RandomUtil randNum = new RandomUtil(1, 4);
             List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 2);
-            items = new GridItem4[5];
-
+            
             items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
 
             items[1] = InstantiateElemento(Comportamento.PERGUNTA, desafio.Pergunta.Resource, grid[0]);
@@ -185,7 +184,6 @@ public class GridManager4 : MonoBehaviour
         {
             RandomUtil randNum = new RandomUtil(1, 5);
             List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 3);
-            items = new GridItem4[6];
 
             items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
 
@@ -221,12 +219,10 @@ public class GridManager4 : MonoBehaviour
                 Destroy(items[i].gameObject);
                 items[i] = null;
             }
-        }
-
-        items = new GridItem4[4];
+        }     
 
         //items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
-        items[1] = InstantiateElemento(Comportamento.PERGUNTA, desafio.Pergunta.Resource, grid[0]);
+        items[1] = InstantiateElemento(Comportamento.NENHUM, "16", new Vector3(0,-1));
         //items[2] = InstantiateElemento(Comportamento.RESPOSTACERTA, desafio.Resposta.Resource, grid[1]);
         items[3] = InstantiateElemento(Comportamento.TREINAMENTONEXT, "15", grid[6]);
         fgClick = true;
@@ -321,7 +317,7 @@ public class GridManager4 : MonoBehaviour
             {
                 source.PlayOneShot(clip);
                
-                Invoke(nameof(CreateGrid), 0.5f);
+                Invoke(nameof(IniciarPartida), 0.5f);
                 
             }
 
@@ -348,6 +344,40 @@ public class GridManager4 : MonoBehaviour
             SceneManager.LoadScene("NivelFracasso");
         }
 
+    }
+
+    private void IniciarTreinamento()
+    {
+        GameObject[] textos = Resources.LoadAll<GameObject>("Texto");
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null)
+            {
+                Destroy(items[i].gameObject);
+                items[i] = null;
+            }
+        }
+
+        items[0] = Instantiate(textos[0], new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem4>();
+        Invoke(nameof(CreateGridTreinamento), 2f);
+    }
+
+    private void IniciarPartida()
+    {
+        GameObject[] textos = Resources.LoadAll<GameObject>("Texto");
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null)
+            {
+                Destroy(items[i].gameObject);
+                items[i] = null;
+            }
+        }
+
+        items[0] = Instantiate(textos[1], new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem4>();
+        Invoke(nameof(CreateGrid), 2f);
     }
 
     enum Comportamento

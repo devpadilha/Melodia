@@ -48,10 +48,11 @@ public class GridManager : MonoBehaviour
 
         index = 0;
 
+        items = new GridItem[10];
+
         montaGrid();
         GetElementos();
-        CreateGridTreinamento();
-        //CreateGrid();
+        IniciarTreinamento();
         CriarHUD();
         fgClick = true;
         GridItem.OnMouseOverItemEventHandler += MouseClick;        
@@ -143,8 +144,7 @@ public class GridManager : MonoBehaviour
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
         {
             RandomUtil randNum = new RandomUtil(1, 3);
-            List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 1);       
-            items = new GridItem[4];
+            List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 1); 
 
             items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
 
@@ -162,7 +162,6 @@ public class GridManager : MonoBehaviour
         {
             RandomUtil randNum = new RandomUtil(1, 4);
             List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 2);     
-            items = new GridItem[5];
 
             items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
 
@@ -184,7 +183,6 @@ public class GridManager : MonoBehaviour
         {
             RandomUtil randNum = new RandomUtil(1, 5);
             List<Elemento> respostasErradas = elementoController.getErradasByDesafio(desafio, 3);
-            items = new GridItem[6];
 
             items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
 
@@ -222,7 +220,6 @@ public class GridManager : MonoBehaviour
             }
         }
          
-        items = new GridItem[4];
 
         items[0] = InstantiateElemento(Comportamento.NENHUM, "0", grid[5]);
         items[1] = InstantiateElemento(Comportamento.NENHUM, desafio.Pergunta.Resource, grid[0]);
@@ -305,7 +302,11 @@ public class GridManager : MonoBehaviour
                 }
                 for (int i = 0; i < items.Length; i++)
                 {
-                    Destroy(items[i].gameObject);
+                    if (items[i] != null)
+                    {
+                        Destroy(items[i].gameObject);
+                        items[i] = null;
+                    }
                 }
 
                 GameObject elemento = reacoes[1];
@@ -322,12 +323,12 @@ public class GridManager : MonoBehaviour
                 index++;
                 if (index < partida.Desafios.ToArray().Length)
                 {
-                    Invoke(nameof(CreateGridTreinamento), 0.5f);
+                    Invoke(nameof(CreateGridTreinamento), 0f);
                 }
                 else
                 {
                     index = 0;
-                    Invoke(nameof(CreateGrid), 0.5f);
+                    Invoke(nameof(IniciarPartida), 0.5f);
                 }
             }
            
@@ -354,6 +355,40 @@ public class GridManager : MonoBehaviour
             SceneManager.LoadScene("NivelFracasso");
         }
             
+    }
+
+    private void IniciarTreinamento()
+    {
+        GameObject[] textos = Resources.LoadAll<GameObject>("Texto");
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null)
+            {
+                Destroy(items[i].gameObject);
+                items[i] = null;
+            }
+        }
+
+        items[0] = Instantiate(textos[0], new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem>();
+        Invoke(nameof(CreateGridTreinamento), 2f);
+    }
+
+    private void IniciarPartida()
+    {
+        GameObject[] textos = Resources.LoadAll<GameObject>("Texto");
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null)
+            {
+                Destroy(items[i].gameObject);
+                items[i] = null;
+            }
+        }
+
+        items[0] = Instantiate(textos[1], new Vector3(0, 0), Quaternion.identity).GetComponent<GridItem>();
+        Invoke(nameof(CreateGrid), 2f);
     }
 
     enum Comportamento
