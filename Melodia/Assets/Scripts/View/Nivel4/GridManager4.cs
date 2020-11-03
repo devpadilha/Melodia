@@ -302,7 +302,11 @@ public class GridManager4 : MonoBehaviour
                 }
                 for (int i = 0; i < items.Length; i++)
                 {
-                    Destroy(items[i].gameObject);
+                    if (items[i] != null)
+                    {
+                        Destroy(items[i].gameObject);
+                        items[i] = null;
+                    }
                 }
 
                 GameObject elemento = reacoes[1];

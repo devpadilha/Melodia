@@ -132,6 +132,14 @@ insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) valu
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 4, 2);
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 5, 3);
 
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 3, 1);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 4, 2);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 5, 3);
+
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 1);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 2);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 1, 2, 3);
+
 insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '02');
 insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '03');
 insert into elemento ( nome, descricao, resource) values('CLAVE DE FA', 'nivel 1', '04');
@@ -191,6 +199,35 @@ insert into elemento ( nome, descricao, resource) values('FÁ', 'nivel 4', '11')
 insert into elemento ( nome, descricao, resource) values('SOL', 'nivel 4', '12');
 insert into elemento ( nome, descricao, resource) values('LÁ', 'nivel 4', '13');
 insert into elemento ( nome, descricao, resource) values('SI', 'nivel 4', '14');
+insert into elemento ( nome, descricao, resource) values('PAUTA CLAVE DE SOL', 'nivel 5', '04');
+insert into elemento ( nome, descricao, resource) values('PAUTA CLAVE DE DÓ', 'nivel 5', '05');
+insert into elemento ( nome, descricao, resource) values('PAUTA CLAVE DE FÁ', 'nivel 5', '06');
+insert into elemento ( nome, descricao, resource) values('01', 'nivel 5 clave de sol', '08');
+insert into elemento ( nome, descricao, resource) values('02', 'nivel 5 clave de sol', '09');
+insert into elemento ( nome, descricao, resource) values('03', 'nivel 5 clave de sol', '10');
+insert into elemento ( nome, descricao, resource) values('04', 'nivel 5 clave de sol', '11');
+insert into elemento ( nome, descricao, resource) values('05', 'nivel 5 clave de sol', '12');
+insert into elemento ( nome, descricao, resource) values('06', 'nivel 5 clave de sol', '13');
+insert into elemento ( nome, descricao, resource) values('07', 'nivel 5 clave de sol', '14');
+insert into elemento ( nome, descricao, resource) values('01', 'nivel 5 clave de dó', '09');
+insert into elemento ( nome, descricao, resource) values('02', 'nivel 5 clave de dó', '10');
+insert into elemento ( nome, descricao, resource) values('03', 'nivel 5 clave de dó', '11');
+insert into elemento ( nome, descricao, resource) values('04', 'nivel 5 clave de dó', '12');
+insert into elemento ( nome, descricao, resource) values('05', 'nivel 5 clave de dó', '13');
+insert into elemento ( nome, descricao, resource) values('06', 'nivel 5 clave de dó', '14');
+insert into elemento ( nome, descricao, resource) values('07', 'nivel 5 clave de dó', '08');
+insert into elemento ( nome, descricao, resource) values('01', 'nivel 5 clave de fá', '10');
+insert into elemento ( nome, descricao, resource) values('02', 'nivel 5 clave de fá', '11');
+insert into elemento ( nome, descricao, resource) values('03', 'nivel 5 clave de fá', '12');
+insert into elemento ( nome, descricao, resource) values('04', 'nivel 5 clave de fá', '13');
+insert into elemento ( nome, descricao, resource) values('05', 'nivel 5 clave de fá', '14');
+insert into elemento ( nome, descricao, resource) values('06', 'nivel 5 clave de fá', '08');
+insert into elemento ( nome, descricao, resource) values('07', 'nivel 5 clave de fá', '09');
+insert into elemento ( nome, descricao, resource) values('SEMÍNIMA', 'nivel 6', '04');
+insert into elemento ( nome, descricao, resource) values('MÍNIMA', 'nivel 6', '05');
+insert into elemento ( nome, descricao, resource) values('SEMIBREVE', 'nivel 6', '06');
+insert into elemento ( nome, descricao, resource) values('PERGUNTA SEMÍNIMA', 'nivel 6', '07');
+insert into elemento ( nome, descricao, resource) values('PERGUNTA MÍNIMA', 'nivel 6', '08');
 
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL', 1, 2, 1);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE FA', 3, 4, 1);
@@ -297,3 +334,59 @@ insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nive
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('SOL', 50, 57, 12);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('LÁ', 51, 58, 12);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('SI', 52, 59, 12);
+
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - DÓ', 60, 63, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - RÉ', 60, 64, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - MI', 60, 65, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - FÁ', 60, 66, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - SOL', 60, 67, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - LÁ', 60, 68, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - SI', 60, 69, 13);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - DÓ', 60, 63, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - RÉ', 60, 64, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - MI', 60, 65, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - FÁ', 60, 66, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - SOL', 60, 67, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - LÁ', 60, 68, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - SI', 60, 69, 14);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - DÓ', 60, 63, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - RÉ', 60, 64, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - MI', 60, 65, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - FÁ', 60, 66, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - SOL', 60, 67, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - LÁ', 60, 68, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL - SI', 60, 69, 15);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - RÉ', 61, 70, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - MI', 61, 71, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - FÁ', 61, 72, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - SOL', 61, 73, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - LÁ', 61, 74, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - SI', 61, 75, 13);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - DÓ', 61, 76, 13);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - RÉ', 61, 70, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - MI', 61, 71, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - FÁ', 61, 72, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - SOL', 61, 73, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - LÁ', 61, 74, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - SI', 61, 75, 14);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - DÓ', 61, 76, 14);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - RÉ', 61, 70, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - MI', 61, 71, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - FÁ', 61, 72, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - SOL', 61, 73, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - LÁ', 61, 74, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - SI', 61, 75, 15);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DÓ - DÓ', 61, 76, 15);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('SEMÍNIMA', 87, 85, 16);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MÍNIMA', 88, 86, 16);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('SEMÍNIMA', 87, 85, 17);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MÍNIMA', 88, 86, 17);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('SEMÍNIMA', 87, 85, 18);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MÍNIMA', 88, 86, 18);

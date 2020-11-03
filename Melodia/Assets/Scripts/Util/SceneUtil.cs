@@ -41,6 +41,7 @@ public class SceneUtil : MonoBehaviour
         }
         catch(Exception e)
         {
+            Debug.Log(e.Message);
             //do nothing;
         }
     }

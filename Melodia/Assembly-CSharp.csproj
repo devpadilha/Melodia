@@ -106,6 +106,10 @@
     <Compile Include="Assets\Scripts\View\Nivel3\GridManager3.cs" />
     <Compile Include="Assets\Scripts\View\Nivel4\GridItem4.cs" />
     <Compile Include="Assets\Scripts\View\Nivel4\GridManager4.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel5\GridItem5.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel5\GridManager5.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel6\GridItem6.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel6\GridManager6.cs" />
     <Compile Include="Assets\Scripts\View\NivelCompleto\ItemGridNC.cs" />
     <Compile Include="Assets\Scripts\View\Questionario\QuestionarioManagement.cs" />
     <Reference Include="UnityEngine">

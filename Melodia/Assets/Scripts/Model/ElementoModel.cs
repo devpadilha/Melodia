@@ -38,11 +38,13 @@ public class ElementoModel
 
         string query = "SELECT e.id, e.nome, e.descricao, e.resource FROM elemento e " +
             " INNER JOIN desafio d ON d.resposta_elemento_id = e.id" +
-            " WHERE d.nivel_id = @nivel AND e.id <> @elemento";
+            " WHERE d.nivel_id = @nivel AND e.id <> @elemento AND e.resource <> @resource" +
+            " GROUP BY e.resource ";
        
         var param = new Dictionary<string, string>();
         param.Add("nivel", desafio.Nivel.Id.ToString());
         param.Add("elemento", desafio.Resposta.Id.ToString());
+        param.Add("resource", desafio.Resposta.Resource);
         Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
 
         if (qtde > retornos.Keys.Count)
