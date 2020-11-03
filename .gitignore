@@ -1,4 +1,9 @@
 
 Build/
 Melodia/Library/PlayerDataCache
+Melodia/Library/Artifacts
+Melodia/Library/StateCache
+Melodia/Library/EditorInstance.json
+Melodia/Temp/
+Melodia/Library/CurrentLayout-default.dwlt
 
