@@ -27,10 +27,12 @@ public class ItemHud : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log(this.comportamento);
-        switch (this.comportamento)
+        if (OnMouseOverItemEventHandler != null)
         {
-            case "SAIR": Debug.Log("Saindo..."); Application.Quit(); break;
-            case "MENU": SceneManager.LoadScene("MainMenu"); break;
+            OnMouseOverItemEventHandler(this);
         }
     }
+
+    public delegate void OnMouseOverItem(ItemHud item);
+    public static event OnMouseOverItem OnMouseOverItemEventHandler;
 }

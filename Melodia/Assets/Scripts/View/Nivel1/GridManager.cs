@@ -123,6 +123,26 @@ public class GridManager : MonoBehaviour
         {
             vidas[i] = Instantiate(icones[2], gridVidas[i], Quaternion.identity).GetComponent<ItemHud>();
         }
+
+        ItemHud.OnMouseOverItemEventHandler += HudClick;
+    }
+
+    private void HudClick(ItemHud item)
+    {
+        switch (item.Comportamento)
+        {
+            case "SAIR":
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
+                GridItem.OnMouseOverItemEventHandler -= MouseClick;
+                Debug.Log("Saindo...");
+                Application.Quit();
+                break;
+            case "MENU":
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
+                GridItem.OnMouseOverItemEventHandler -= MouseClick;
+                SceneManager.LoadScene("MainMenu");
+                break;
+        }
     }
 
     private void CreateGrid()
@@ -330,6 +350,10 @@ public class GridManager : MonoBehaviour
                     index = 0;
                     Invoke(nameof(IniciarPartida), 0.5f);
                 }
+            }
+            else
+            {
+                fgClick = true;
             }
            
         }

@@ -112,6 +112,22 @@ insert into questionario (pergunta, opcoes, nivel_id) values
 ('3. Fi é uma nota musical?', 'Sim;Não;', 10),
 ('4. Ré é uma nota musical?', 'Sim;Não;', 10);
 
+insert into questionario (pergunta, opcoes, nivel_id) values
+('1. As linhas da pauta são contadas na ordem: da última para a primeira?', 'Sim;Não;', 14),
+('2. Toda a pauta tem 5 linhas?', 'Sim;Não;', 14),
+('3. A clave de sol deve ser posicionada na segunda linha?', 'Sim;Não;', 14),
+('4. A clave de fá deve ser posicionada na quarta linha?', 'Sim;Não;', 14),
+('5. Podemos colocar mais de uma nota na mesma pauta?', 'Sim;Não;', 14),
+('6. Podemos colocar mais de uma clave na mesma pauta?', 'Sim;Não;', 14);
+
+insert into questionario (pergunta, opcoes, nivel_id) values
+('1. A semínima vale 1 tempo?', 'Sim;Não;', 16),
+('2. A mínima vale 3 tempos?', 'Sim;Não;', 16),
+('3. 2 semínimas valem o mesmo tempo que 1 mínima?', 'Sim;Não;', 16),
+('4. 1 colcheia vale o mesmo tempo que 1 semibreve?', 'Sim;Não;', 16),
+('5. 1 semibreve vale 4 tempos?', 'Sim;Não;', 16),
+('6. 1 semínima vale o mesmo tempo que 2 colcheias?', 'Sim;Não;', 16);
+
 insert into dificuldade (nome, descricao) values ('FÁCIL', '');
 insert into dificuldade (nome, descricao) values ('MÉDIO', '');
 insert into dificuldade (nome, descricao) values ('DIFÍCIL', '');

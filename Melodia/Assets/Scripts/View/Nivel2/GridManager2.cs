@@ -154,6 +154,26 @@ public class GridManager2 : MonoBehaviour
         {
             vidas[i] = Instantiate(icones[2], gridVidas[i], Quaternion.identity).GetComponent<ItemHud>();
         }
+
+        ItemHud.OnMouseOverItemEventHandler += HudClick;
+    }
+
+    private void HudClick(ItemHud item)
+    {
+        switch (item.Comportamento)
+        {
+            case "SAIR":
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
+                GridItem2.OnMouseOverItemEventHandler -= MouseClick;
+                Debug.Log("Saindo...");
+                Application.Quit();
+                break;
+            case "MENU":
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
+                GridItem2.OnMouseOverItemEventHandler -= MouseClick;
+                SceneManager.LoadScene("MainMenu");
+                break;
+        }
     }
 
     private void EncerrarPartida()
