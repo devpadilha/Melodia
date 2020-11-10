@@ -76,28 +76,20 @@ public class NivelModel
             param.Add("nome", nivelNome.ToUpper());
             param.Add("dificuldade", "1");
         }
-        else if (!ultimaPartida.Nivel.Nome.Equals(nivelNome.ToUpper()))
-        {
-            if(ultimaPartida.Nivel.Id > nivel.Id)
-            {
-                param.Add("nome", nivelNome.ToUpper());
-                param.Add("dificuldade", "3");
-            }
-            else
-            {
-                param.Add("nome", nivelNome.ToUpper());
-                param.Add("dificuldade", "1");
-            }
-        }
-        else if((ultimaPartida.Nivel.Dificuldade.Id + 1) > 3)
+        else if (ultimaPartida.Nivel.Dificuldade.Id.Equals((int) DificuldadeEnum.Dificuldade.FACIL))
         {
             param.Add("nome", nivelNome.ToUpper());
-            param.Add("dificuldade", (ultimaPartida.Nivel.Dificuldade.Id).ToString());
+            param.Add("dificuldade", "2");
+        }
+        else if (ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
+        {
+            param.Add("nome", nivelNome.ToUpper());
+            param.Add("dificuldade", "3");
         }
         else
         {
             param.Add("nome", nivelNome.ToUpper());
-            param.Add("dificuldade", (ultimaPartida.Nivel.Dificuldade.Id + 1).ToString());
+            param.Add("dificuldade", "3");
         }      
 
 

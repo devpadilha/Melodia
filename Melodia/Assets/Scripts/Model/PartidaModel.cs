@@ -76,6 +76,42 @@ public class PartidaModel
         return partida;
     }
 
+    public Partida getUltimaNivel(Jogador jogador, Nivel nivel)
+    {
+        Partida partida = null;
+        JogadorController jogadorController = new JogadorController();
+        NivelController nivelController = new NivelController();
+        DesafioController desafioController = new DesafioController();
+
+        string query = "SELECT p.id, p.acertos, p.erros, p.data_inicio, p.data_termino, p.concluido, p.jogador_id, p.nivel_id FROM partida p " +
+            " INNER JOIN nivel n ON n.id = p.nivel_id " +
+            " WHERE p.jogador_id = @id and n.nome = @nivel and p.data_termino is not null and p.concluido = @concluido ORDER BY p.data_inicio DESC";
+        var param = new Dictionary<string, string>();
+        param.Add("id", jogador.Id.ToString());
+        param.Add("nivel", nivel.Nome.ToUpper());
+        param.Add("concluido", "1");
+
+        Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
+        if (retornos.Count > 0)
+        {
+            List<string> retorno = retornos[0];
+
+            partida = new Partida();
+            partida.Id = Int32.Parse(retorno[0]);
+            partida.Acertos = Int32.Parse(retorno[1]);
+            partida.Erros = Int32.Parse(retorno[2]);
+            partida.DataInicio = DateTime.Parse(retorno[3]);
+            if (retorno[4].Length > 0)
+                partida.DataTermino = DateTime.Parse(retorno[4]);
+            partida.Concluido = Boolean.Parse(retorno[5]);
+            partida.Jogador = jogadorController.get(Int32.Parse(retorno[6]));
+            partida.Nivel = nivelController.get(Int32.Parse(retorno[7]));
+            partida.Desafios = desafioController.getByPartida(partida);
+        }
+
+        return partida;
+    }
+
     public Partida getAtual(Jogador jogador, string nivel)
     {
         Partida partida = null;
@@ -123,13 +159,14 @@ public class PartidaModel
         DateTime agora = DateTime.Now;
 
 
-        string query = "INSERT INTO partida (acertos, erros, jogador_id, nivel_id, data_inicio) VALUES ( @acertos, @erros, @jogador, @nivel, @dataInicio)";
+        string query = "INSERT INTO partida (acertos, erros, jogador_id, nivel_id, data_inicio, concluido) VALUES ( @acertos, @erros, @jogador, @nivel, @dataInicio, @concluido)";
         var param = new Dictionary<string, string>();
         param.Add("acertos", "0");
         param.Add("erros", "0");
         param.Add("jogador", jogador.Id.ToString());
         param.Add("nivel", nivel.Id.ToString());
         param.Add("dataInicio", dataBase.DateTimeSQLite(agora));
+        param.Add("concluido", "0");
         int id = dataBase.Insert(query, param);
 
         partida = get(id);

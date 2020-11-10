@@ -128,6 +128,14 @@ insert into questionario (pergunta, opcoes, nivel_id) values
 ('5. 1 semibreve vale 4 tempos?', 'Sim;Não;', 16),
 ('6. 1 semínima vale o mesmo tempo que 2 colcheias?', 'Sim;Não;', 16);
 
+insert into questionario (pergunta, opcoes, nivel_id) values
+('1. Você sabe em qual linha a clave de sol deve ser posicionada?', 'Sim;Não;', 19),
+('2. Podemos colocar todas as notas da escala musical na pauta?', 'Sim;Não;', 19),
+('3. Podemos criar uma melodia e colocar na pauta?', 'Sim;Não;', 19),
+('4. Podemos criar uma harmonia e colocar na pauta?', 'Sim;Não;', 19),
+('5. Uma harmonia pode ter 4 tempos?', 'Sim;Não;', 19),
+('6. Para formar uma melodia precisamos usar notas de clave e sol ou de fá?', 'Sim;Não;', 19);
+
 insert into dificuldade (nome, descricao) values ('FÁCIL', '');
 insert into dificuldade (nome, descricao) values ('MÉDIO', '');
 insert into dificuldade (nome, descricao) values ('DIFÍCIL', '');
@@ -155,6 +163,10 @@ insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) valu
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 1);
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 2);
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 1, 2, 3);
+
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 2, 2, 1);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 2, 3, 2);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 1, 4, 3);
 
 insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '02');
 insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '03');
@@ -244,6 +256,10 @@ insert into elemento ( nome, descricao, resource) values('MÍNIMA', 'nivel 6', '
 insert into elemento ( nome, descricao, resource) values('SEMIBREVE', 'nivel 6', '06');
 insert into elemento ( nome, descricao, resource) values('PERGUNTA SEMÍNIMA', 'nivel 6', '07');
 insert into elemento ( nome, descricao, resource) values('PERGUNTA MÍNIMA', 'nivel 6', '08');
+insert into elemento ( nome, descricao, resource) values('COLCHEIA', 'nivel 2', '00');
+insert into elemento ( nome, descricao, resource) values('SEMINIMA', 'nivel 3', '01');
+insert into elemento ( nome, descricao, resource) values('MINIMA', 'nivel 4', '02');
+insert into elemento ( nome, descricao, resource) values('SEMIBREVE', 'nivel 5', '03');
 
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL', 1, 2, 1);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE FA', 3, 4, 1);
@@ -406,3 +422,15 @@ insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nive
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MÍNIMA', 88, 86, 17);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('SEMÍNIMA', 87, 85, 18);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MÍNIMA', 88, 86, 18);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('Selecione as notas de 1 tempo', null, 90, 19);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('Selecione as notas de 2 tempos', null, 91, 19);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('selecione as notas de 4 tempos', null, 92, 19);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('Selecione as notas de 1 tempo', null, 90, 20);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('Selecione as notas de 2 tempos', null, 91, 20);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('selecione as notas de 4 tempos', null, 92, 20);
+
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('Selecione as notas de 1 tempo', null, 90, 21);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('Selecione as notas de 2 tempos', null, 91, 21);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('selecione as notas de 4 tempos', null, 92, 21);

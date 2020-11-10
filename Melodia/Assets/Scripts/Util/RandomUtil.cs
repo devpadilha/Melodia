@@ -28,7 +28,7 @@ public class RandomUtil
             rand = ini + rand;
         } while (last.Any(n => n == rand));
         last.Add(rand);
-        Debug.Log("Random: " + rand);
+        //Debug.Log("Random: " + rand);
         return rand;
     }
 

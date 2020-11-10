@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public Login usuario;
-    public Partida ultimaPartida;
     private LoginController loginController;
     private PartidaController partidaController;
+    private NivelController nivelController;
     private QuestionarioController questionarioController;
     private AudioSource source;
     public AudioClip clip;
     private string nextScene;
+    public ItemHud[] huds;
+    public AudioSource backgroudSound;
 
     public GameObject[] items;
     // Start is called before the first frame update
@@ -21,14 +23,17 @@ public class MenuManager : MonoBehaviour
         loginController = new LoginController();
         partidaController = new PartidaController();
         questionarioController = new QuestionarioController();
+        nivelController = new NivelController();
 
         source = GetComponent<AudioSource>();
 
-        usuario = loginController.getAtivo();
-        ultimaPartida = partidaController.getUltima(usuario.Jogador);
+        usuario = loginController.getAtivo();        
 
         carregarItems();
         carregarItensMenu();
+
+        CriarHUD();
+
         MenuItem.OnMouseOverItemEventHandler += MouseClick;
         
     }
@@ -44,14 +49,64 @@ public class MenuManager : MonoBehaviour
         else
         {
             nextScene = "Questionario";
+            PlayerPrefs.SetString("NIVEL", item.Nivel.ToUpper());
             Invoke(nameof(carregarCena), 0.5f);
         }
         
     }
 
+    private void CriarHUD()
+    {
+        GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
+        huds = new ItemHud[6];       
+
+        huds[0] = Instantiate(icones[1], new Vector3(6, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[0].create("SAIR", "1");
+
+        PlayerPrefs.SetString("SOM", "ON");
+
+        huds[1] = Instantiate(icones[4], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+        huds[1].create("SOMOFF", "4");
+ 
+
+
+        ItemHud.OnMouseOverItemEventHandler += HudClick;
+    }
+
+    private void HudClick(ItemHud item)
+    {
+        GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
+        switch (item.Comportamento)
+        {
+            case "SAIR":
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
+                MenuItem.OnMouseOverItemEventHandler -= MouseClick;
+                Debug.Log("Saindo...");
+                Application.Quit();
+                break;
+
+            case "SOMOFF":
+                backgroudSound.Pause();
+                PlayerPrefs.SetString("SOM", "OFF");
+                Destroy(huds[1].gameObject);
+                huds[1] = Instantiate(icones[5], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+                huds[1].create("SOMON", "5");                
+                break;
+
+            case "SOMON":
+                backgroudSound.UnPause();
+                PlayerPrefs.SetString("SOM", "ON");
+                Destroy(huds[1].gameObject);
+                huds[1] = Instantiate(icones[4], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+                huds[1].create("SOMOFF", "4");
+                break;
+        }
+    }
+
     private void carregarCena()
     {
         MenuItem.OnMouseOverItemEventHandler -= MouseClick;
+        ItemHud.OnMouseOverItemEventHandler -= HudClick;
         SceneManager.LoadScene(nextScene);
     }
 
@@ -96,101 +151,151 @@ public class MenuManager : MonoBehaviour
             newItem = Instantiate(item, new Vector3(5, -0.5f), Quaternion.identity).GetComponent<MenuItem>();
             newItem.create("Nivel6", "1");
         }
+        if (podeCarregarNivel(NivelEnum.Nivel.NIVEL7))
+        {
+            item = items[1];
+            newItem = Instantiate(item, new Vector3(7, 0), Quaternion.identity).GetComponent<MenuItem>();
+            newItem.create("Nivel6", "1");
+        }
 
     }
 
-    private bool podeCarregarNivel(NivelEnum.Nivel nivel)
+    private bool podeCarregarNivel(NivelEnum.Nivel nivelNome)
     {
         bool flag = false;
-        switch (nivel)
+        Nivel nivel = nivelController.get(nivelNome.ToString());
+        Partida ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+        
+        switch (nivelNome)
         {
             case NivelEnum.Nivel.NIVEL1:
                 flag = true;
                 break;
 
             case NivelEnum.Nivel.NIVEL2:
-                if(ultimaPartida == null)
+                if(ultimaPartida != null)
                 {
-                    flag = false;
+                    flag = true;
+                }
+                else
+                {
+                    nivel = nivelController.get(NivelEnum.Nivel.NIVEL1.ToString());
+                    ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+                    if(ultimaPartida == null)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+
                 }               
-                else if(ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL1.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
-                {
-                    flag = true;
-                }
-                else if((ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL2.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper())) 
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL4.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL5.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL6.ToString().ToUpper()))
-                {
-                    flag = true;
-                }
                 break;
 
             case NivelEnum.Nivel.NIVEL3:
-                if (ultimaPartida == null)
-                {
-                    flag = false;
-                }                
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL2.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+                if (ultimaPartida != null)
                 {
                     flag = true;
                 }
-                else if ((ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper()))
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL4.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL5.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL6.ToString().ToUpper()))
+                else
                 {
-                    flag = true;
+                    nivel = nivelController.get(NivelEnum.Nivel.NIVEL2.ToString());
+                    ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+                    if (ultimaPartida == null)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+
                 }
                 break;
 
             case NivelEnum.Nivel.NIVEL4:
-                if (ultimaPartida == null)
-                {
-                    flag = false;
-                }
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+                if (ultimaPartida != null)
                 {
                     flag = true;
                 }
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL4.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL5.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL6.ToString().ToUpper()))
+                else
                 {
-                    flag = true;
+                    nivel = nivelController.get(NivelEnum.Nivel.NIVEL3.ToString());
+                    ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+                    if (ultimaPartida == null)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+
                 }
                 break;
 
             case NivelEnum.Nivel.NIVEL5:
-                if (ultimaPartida == null)
-                {
-                    flag = false;
-                }
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL4.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+                if (ultimaPartida != null)
                 {
                     flag = true;
                 }
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL5.ToString().ToUpper())
-                    || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL6.ToString().ToUpper()))
+                else
                 {
-                    flag = true;
+                    nivel = nivelController.get(NivelEnum.Nivel.NIVEL4.ToString());
+                    ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+                    if (ultimaPartida == null)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+
                 }
                 break;
 
 
             case NivelEnum.Nivel.NIVEL6:
-                if (ultimaPartida == null)
-                {
-                    flag = false;
-                }
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL5.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+                if (ultimaPartida != null)
                 {
                     flag = true;
                 }
-                else if (ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL6.ToString().ToUpper()))
+                else
+                {
+                    nivel = nivelController.get(NivelEnum.Nivel.NIVEL5.ToString());
+                    ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+                    if (ultimaPartida == null)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+
+                }
+                break;
+
+            case NivelEnum.Nivel.NIVEL7:
+                if (ultimaPartida != null)
                 {
                     flag = true;
+                }
+                else
+                {
+                    nivel = nivelController.get(NivelEnum.Nivel.NIVEL6.ToString());
+                    ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+                    if (ultimaPartida == null)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+
                 }
                 break;
         }

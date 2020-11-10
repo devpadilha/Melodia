@@ -446,6 +446,7 @@ MonoBehaviour:
   huds: []
   vidas: []
   clip: {fileID: 8300000, guid: e2b06bfa4911e124b9301cca7d484b1c, type: 3}
+  backgroudSound: {fileID: 803494043}
 --- !u!4 &1611120546
 Transform:
   m_ObjectHideFlags: 0

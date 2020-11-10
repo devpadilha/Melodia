@@ -110,6 +110,8 @@
     <Compile Include="Assets\Scripts\View\Nivel5\GridManager5.cs" />
     <Compile Include="Assets\Scripts\View\Nivel6\GridItem6.cs" />
     <Compile Include="Assets\Scripts\View\Nivel6\GridManager6.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel7\GridItem7.cs" />
+    <Compile Include="Assets\Scripts\View\Nivel7\GridManager7.cs" />
     <Compile Include="Assets\Scripts\View\NivelCompleto\ItemGridNC.cs" />
     <Compile Include="Assets\Scripts\View\Questionario\QuestionarioManagement.cs" />
     <Reference Include="UnityEngine">

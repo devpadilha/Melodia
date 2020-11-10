@@ -291,7 +291,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b345c68d5c2827d4abcbdc9b3e098afc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1094,6 +1094,8 @@ MonoBehaviour:
   pergunta: {fileID: 1480367364}
   op1: {fileID: 2050487128}
   op2: {fileID: 476232955}
+  huds: []
+  backgroudSound: {fileID: 270883674}
 --- !u!4 &1658609168
 Transform:
   m_ObjectHideFlags: 0

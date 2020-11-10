@@ -252,6 +252,7 @@ MonoBehaviour:
   huds: []
   index: 0
   clip: {fileID: 8300000, guid: e2b06bfa4911e124b9301cca7d484b1c, type: 3}
+  backgroudSound: {fileID: 1859163688}
 --- !u!4 &1125750512
 Transform:
   m_ObjectHideFlags: 0

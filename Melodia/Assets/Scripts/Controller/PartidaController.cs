@@ -17,6 +17,11 @@
         return model.getUltima(jogador);
     }
 
+    public Partida getUltimaNivel(Jogador jogador, Nivel nivel)
+    {
+        return model.getUltimaNivel(jogador, nivel);
+    }
+
     public Partida getAtual(Jogador jogador, string nivel)
     {
         return model.getAtual(jogador, nivel);

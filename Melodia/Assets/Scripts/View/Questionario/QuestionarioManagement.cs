@@ -19,6 +19,10 @@ public class QuestionarioManagement : MonoBehaviour
     private NivelController nivelController;
     private int index;
     private bool fgClick;
+
+    public ItemHud[] huds;
+    public AudioSource backgroudSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,30 +31,16 @@ public class QuestionarioManagement : MonoBehaviour
         partidaController = new PartidaController();
         nivelController = new NivelController();
 
+        CriarHUD();
+
         usuario = loginController.getAtivo();
         ultimaPartida = partidaController.getUltima(usuario.Jogador);
-        
 
-        if (ultimaPartida == null || ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL1.ToString().ToUpper()))
-        {
-            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL1.ToString(), ultimaPartida);
-            questionario = questionarioController.getByNivel(nivel);
-        }
-        if (ultimaPartida != null && ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL1.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int) DificuldadeEnum.Dificuldade.DIFICIL))
-        {
-            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
-            questionario = questionarioController.getByNivel(nivel);
-        }
-        if (ultimaPartida != null && ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL2.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
-        {
-            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL3.ToString(), ultimaPartida);
-            questionario = questionarioController.getByNivel(nivel);
-        }
-        if (ultimaPartida != null && ultimaPartida.Nivel.Nome.Equals(NivelEnum.Nivel.NIVEL3.ToString().ToUpper()) && ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
-        {
-            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL4.ToString(), ultimaPartida);
-            questionario = questionarioController.getByNivel(nivel);
-        }
+        string nivelNome = PlayerPrefs.GetString("NIVEL");
+        
+        nivel = nivelController.get(nivelNome);
+        questionario = questionarioController.getByNivel(nivel);
+        
 
         op1.isOn = false;
         op2.isOn = false;
@@ -65,10 +55,51 @@ public class QuestionarioManagement : MonoBehaviour
         fgClick = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CriarHUD()
     {
-       
+        GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
+        huds = new ItemHud[6];
+
+
+        string som = PlayerPrefs.GetString("SOM");
+        if (som.Equals("ON"))
+        {
+            backgroudSound.UnPause();
+            huds[0] = Instantiate(icones[4], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[0].create("SOMOFF", "4");
+        }
+        else
+        {
+            backgroudSound.Pause();
+            huds[0] = Instantiate(icones[5], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[0].create("SOMON", "5");
+        }
+
+        ItemHud.OnMouseOverItemEventHandler += HudClick;
+    }
+
+    private void HudClick(ItemHud item)
+    {
+        GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
+        switch (item.Comportamento)
+        {         
+
+            case "SOMOFF":
+                backgroudSound.Pause();
+                PlayerPrefs.SetString("SOM", "OFF");
+                Destroy(huds[0].gameObject);
+                huds[0] = Instantiate(icones[5], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+                huds[0].create("SOMON", "5");
+                break;
+
+            case "SOMON":
+                backgroudSound.UnPause();
+                PlayerPrefs.SetString("SOM", "ON");
+                Destroy(huds[0].gameObject);
+                huds[0] = Instantiate(icones[4], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+                huds[0].create("SOMOFF", "4");
+                break;
+        }
     }
 
     private void ToggleClick()
@@ -105,6 +136,7 @@ public class QuestionarioManagement : MonoBehaviour
             }
             else
             {
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
                 SceneManager.LoadScene("MainMenu");
             }
             

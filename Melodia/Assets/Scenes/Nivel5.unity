@@ -593,6 +593,7 @@ MonoBehaviour:
   index: 0
   campoPergunta: {fileID: 519660026}
   clip: {fileID: 8300000, guid: e2b06bfa4911e124b9301cca7d484b1c, type: 3}
+  backgroudSound: {fileID: 1658790041}
 --- !u!4 &1319839132
 Transform:
   m_ObjectHideFlags: 0
