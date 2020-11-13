@@ -111,6 +111,8 @@ public class GridManager7 : MonoBehaviour
         huds[1] = Instantiate(icones[1], new Vector3(6, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[1].create("SAIR", "1");
 
+        Debug.Log(nivel.Dificuldade.Id);
+
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
         {
             huds[2] = Instantiate(icones[3], new Vector3(-8, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
@@ -220,13 +222,16 @@ public class GridManager7 : MonoBehaviour
 
     private void CriarPartida()
     {
-        nivel = nivelController.get(NivelEnum.Nivel.NIVEL1.ToString());
+        nivel = nivelController.get(NivelEnum.Nivel.NIVEL7.ToString());
         ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
         partida = partidaController.getAtual(usuario.Jogador, NivelEnum.Nivel.NIVEL7.ToString());
+       
 
         if (partida == null)
         {
+            Debug.Log(ultimaPartida.Id);
             nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL7.ToString(), ultimaPartida);
+            Debug.Log(nivel.Dificuldade.Id);
 
             if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
             {
@@ -243,7 +248,7 @@ public class GridManager7 : MonoBehaviour
         }
         else
         {
-            nivel = partida.Nivel;
+            nivel = partida.Nivel;         
         }
 
         numErros = nivel.MaxErros;

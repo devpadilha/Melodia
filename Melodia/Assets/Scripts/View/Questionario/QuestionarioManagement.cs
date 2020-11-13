@@ -19,6 +19,7 @@ public class QuestionarioManagement : MonoBehaviour
     private NivelController nivelController;
     private int index;
     private bool fgClick;
+    private string nivelNome;
 
     public ItemHud[] huds;
     public AudioSource backgroudSound;
@@ -36,7 +37,7 @@ public class QuestionarioManagement : MonoBehaviour
         usuario = loginController.getAtivo();
         ultimaPartida = partidaController.getUltima(usuario.Jogador);
 
-        string nivelNome = PlayerPrefs.GetString("NIVEL");
+        nivelNome = PlayerPrefs.GetString("NIVEL");
         
         nivel = nivelController.get(nivelNome);
         questionario = questionarioController.getByNivel(nivel);
@@ -137,7 +138,7 @@ public class QuestionarioManagement : MonoBehaviour
             else
             {
                 ItemHud.OnMouseOverItemEventHandler -= HudClick;
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene(nivelNome);
             }
             
         }

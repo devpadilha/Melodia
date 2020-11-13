@@ -113,12 +113,12 @@ insert into questionario (pergunta, opcoes, nivel_id) values
 ('4. Ré é uma nota musical?', 'Sim;Não;', 10);
 
 insert into questionario (pergunta, opcoes, nivel_id) values
-('1. As linhas da pauta são contadas na ordem: da última para a primeira?', 'Sim;Não;', 14),
+('1. As linhas da pauta são contadas na ordem: da última para a primeira?', 'Sim;Não;', 13),
 ('2. Toda a pauta tem 5 linhas?', 'Sim;Não;', 14),
-('3. A clave de sol deve ser posicionada na segunda linha?', 'Sim;Não;', 14),
-('4. A clave de fá deve ser posicionada na quarta linha?', 'Sim;Não;', 14),
-('5. Podemos colocar mais de uma nota na mesma pauta?', 'Sim;Não;', 14),
-('6. Podemos colocar mais de uma clave na mesma pauta?', 'Sim;Não;', 14);
+('3. A clave de sol deve ser posicionada na segunda linha?', 'Sim;Não;', 13),
+('4. A clave de fá deve ser posicionada na quarta linha?', 'Sim;Não;', 13),
+('5. Podemos colocar mais de uma nota na mesma pauta?', 'Sim;Não;', 13),
+('6. Podemos colocar mais de uma clave na mesma pauta?', 'Sim;Não;', 13);
 
 insert into questionario (pergunta, opcoes, nivel_id) values
 ('1. A semínima vale 1 tempo?', 'Sim;Não;', 16),

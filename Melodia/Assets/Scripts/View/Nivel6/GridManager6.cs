@@ -311,7 +311,7 @@ public class GridManager6 : MonoBehaviour
     private void montaGrid()
     {
         grid = new Dictionary<int, Vector3>();
-        grid.Add(0, new Vector3(-7, -1));
+        grid.Add(0, new Vector3(-6, 0));
         grid.Add(1, new Vector3(4, 0));
         grid.Add(2, new Vector3(4, -2));
         grid.Add(3, new Vector3(4, 2));

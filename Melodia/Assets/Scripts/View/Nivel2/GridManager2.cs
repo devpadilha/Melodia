@@ -54,7 +54,7 @@ public class GridManager2 : MonoBehaviour
         CreateGrid();
         CriarHUD();
 
-        fgClick = true;
+        fgClick = false;
         GridItem2.OnMouseOverItemEventHandler += MouseClick;
     }
 
@@ -314,7 +314,7 @@ public class GridManager2 : MonoBehaviour
     private void CreateGrid()
     {
         
-        int rand;
+        int rand; 
 
         List<Desafio> desafios = partida.Desafios;
 
@@ -417,6 +417,8 @@ public class GridManager2 : MonoBehaviour
         {
             itemsQ[i] = InstantiateElemento(valor: "DESCONHECIDO", resource: "0", posicao: grid[i], true, i);
         }
+
+        fgClick = true;
     }
 
     GridItem2 InstantiateElemento(string valor, string resource, Vector3 posicao, bool render, int index)

@@ -287,13 +287,12 @@ public class GridManager5 : MonoBehaviour
                 items[3] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
             }
 
-            pos = pos + 7;          
+            /*pos = pos + 7;          
 
             if (gridPauta.ContainsKey(pos))
             {
                 items[4] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
-            }
-            
+            }*/           
 
         }
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
@@ -319,14 +318,12 @@ public class GridManager5 : MonoBehaviour
                 items[4] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
             }
 
-            pos = pos + 7;
+            /*pos = pos + 7;
 
             if (gridPauta.ContainsKey(pos))
             {
                 items[5] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
-            }
-
-
+            }*/
         }
         if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
         {
@@ -354,14 +351,12 @@ public class GridManager5 : MonoBehaviour
                 items[5] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
             }
 
-            pos = pos + 7;
+            /*pos = pos + 7;
 
             if (gridPauta.ContainsKey(pos))
             {
                 items[6] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
-            }
-
-
+            }*/
         }
         fgClick = true;
     }

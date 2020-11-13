@@ -301,12 +301,12 @@ public class GridManager4 : MonoBehaviour
     private void montaGrid()
     {
         grid = new Dictionary<int, Vector3>();
-        grid.Add(0, new Vector3(-7, -1));
+        grid.Add(0, new Vector3(-5, -1));
         grid.Add(1, new Vector3(4, 0));
         grid.Add(2, new Vector3(4, -2));
         grid.Add(3, new Vector3(4, 2));
         grid.Add(4, new Vector3(4, -4));
-        grid.Add(5, new Vector3(-2, -1));
+        grid.Add(5, new Vector3(-1, -1));
         grid.Add(6, new Vector3(8, -1));
     }
 

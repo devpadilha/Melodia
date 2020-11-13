@@ -155,7 +155,7 @@ public class MenuManager : MonoBehaviour
         {
             item = items[1];
             newItem = Instantiate(item, new Vector3(7, 0), Quaternion.identity).GetComponent<MenuItem>();
-            newItem.create("Nivel6", "1");
+            newItem.create("Nivel7", "1");
         }
 
     }
