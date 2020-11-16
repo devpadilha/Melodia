@@ -34,6 +34,8 @@ public class GridManager5 : MonoBehaviour
 
     public AudioSource backgroudSound;
 
+    private MontarAjuda ajuda;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,8 @@ public class GridManager5 : MonoBehaviour
         partidaController = new PartidaController();
         nivelController = new NivelController();
         elementoController = new ElementoController();
+
+        PlayerPrefs.SetString("NIVEL", "NIVEL5");
 
         source = GetComponent<AudioSource>();
 
@@ -146,7 +150,7 @@ public class GridManager5 : MonoBehaviour
     private void CriarHUD()
     {
         GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
-        huds = new ItemHud[7];
+        huds = new ItemHud[8];
 
         huds[0] = Instantiate(icones[0], new Vector3(2, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[0].create("MENU", "0");
@@ -184,7 +188,8 @@ public class GridManager5 : MonoBehaviour
             huds[6].create("SOMON", "5");
         }
 
-
+        huds[7] = Instantiate(icones[6], new Vector3(8, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+        huds[7].create("AJUDA", "6");
 
 
         Dictionary<int, Vector3> gridVidas = new Dictionary<int, Vector3>();
@@ -234,7 +239,25 @@ public class GridManager5 : MonoBehaviour
                 huds[6] = Instantiate(icones[4], new Vector3(-1, 4), Quaternion.identity).GetComponent<ItemHud>();
                 huds[6].create("SOMOFF", "4");
                 break;
+
+            case "AJUDA":
+                Debug.Log("teste ajuda1");
+                CarregarAjuda();
+                break;
         }
+    }
+
+    private void CarregarAjuda()
+    {
+        if (ajuda == null)
+        {
+            GameObject[] temps = Resources.LoadAll<GameObject>("Ajuda");
+            GameObject poUp = temps[0];
+
+            ajuda = Instantiate(poUp, new Vector3(0, 0), Quaternion.identity).GetComponent<MontarAjuda>();
+        }
+
+        ajuda.GetComponent<Canvas>().enabled = true;
     }
 
     private void CreateGrid()

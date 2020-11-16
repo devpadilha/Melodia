@@ -93,6 +93,8 @@
     <Compile Include="Assets\Scripts\VO\Partida.cs" />
     <Compile Include="Assets\Scripts\VO\Questionario.cs" />
     <Compile Include="Assets\Scripts\VO\Resposta.cs" />
+    <Compile Include="Assets\Scripts\View\Ajuda\BotaoFechar.cs" />
+    <Compile Include="Assets\Scripts\View\Ajuda\MontarAjuda.cs" />
     <Compile Include="Assets\Scripts\View\Cadastro\DropDownNascimento.cs" />
     <Compile Include="Assets\Scripts\View\Hud\ItemHud.cs" />
     <Compile Include="Assets\Scripts\View\Login\LoginView.cs" />
