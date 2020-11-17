@@ -209,4 +209,80 @@ public class PartidaModel
 
         int id = dataBase.Insert(query, param);
     }
+
+    public bool verificarNivelCompleto(Partida ultimaPartida)
+    {
+        if(ultimaPartida == null)
+        {
+            return false;
+        }
+
+        Nivel nivel = ultimaPartida.Nivel;
+        Jogador jogador = ultimaPartida.Jogador;
+        int count = 0;
+
+        string query = "SELECT COUNT(DISTINCT n.id) FROM partida p INNER JOIN nivel n ON n.id = p.nivel_id WHERE n.dificuldade_id = @dificuldade AND jogador_id = @jogador AND concluido = 1 AND data_termino is not null ";
+        var param = new Dictionary<string, string>();
+        param.Add("dificuldade", nivel.Dificuldade.Id.ToString());
+        param.Add("jogador", jogador.Id.ToString());
+
+
+        Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
+        if (retornos.Count > 0)
+        {
+            List<string> retorno = retornos[0];
+            count = Int32.Parse(retorno[0]);
+        }
+
+        if(count >= 7)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }        
+    }
+
+    public Dificuldade obterDificuldadeJogador(Jogador jogador)
+    {
+        Partida partida = null;
+        JogadorController jogadorController = new JogadorController();
+        NivelController nivel = new NivelController();
+        DesafioController desafioController = new DesafioController();
+        DificuldadeController dificuldadeController = new DificuldadeController();
+        string query = "SELECT p.id, p.acertos, p.erros, p.data_inicio, p.data_termino, p.concluido, p.jogador_id, p.nivel_id FROM partida p INNER JOIN nivel n ON n.id = p.nivel_id WHERE jogador_id = @jogador AND concluido = 1 AND data_termino is not null ORDER BY n.dificuldade_id DESC ";
+        var param = new Dictionary<string, string>();
+        param.Add("jogador", jogador.Id.ToString());
+
+        Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
+        if (retornos.Count > 0)
+        {
+            List<string> retorno = retornos[0];
+
+            partida = new Partida();
+            partida.Id = Int32.Parse(retorno[0]);
+            partida.Acertos = Int32.Parse(retorno[1]);
+            partida.Erros = Int32.Parse(retorno[2]);
+            partida.DataInicio = DateTime.Parse(retorno[3]);
+            if (retorno[4].Length > 0)
+                partida.DataTermino = DateTime.Parse(retorno[4]);
+            partida.Concluido = Boolean.Parse(retorno[5]);
+            partida.Jogador = jogadorController.get(Int32.Parse(retorno[6]));
+            partida.Nivel = nivel.get(Int32.Parse(retorno[7]));
+            partida.Desafios = desafioController.getByPartida(partida);
+        }
+
+        bool fgConcluido = this.verificarNivelCompleto(partida);
+
+        Dificuldade dificuldade = partida.Nivel.Dificuldade;
+        if (fgConcluido && dificuldade.Id != (int)DificuldadeEnum.Dificuldade.DIFICIL)
+        {
+            return dificuldadeController.get(dificuldade.Id + 1);
+        }
+        else
+        {
+            return partida.Nivel.Dificuldade;
+        }        
+    }
 }

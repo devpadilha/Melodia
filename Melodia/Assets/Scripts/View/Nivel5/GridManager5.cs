@@ -309,6 +309,11 @@ public class GridManager5 : MonoBehaviour
             {
                 items[3] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
             }
+            else
+            {
+                pos = pos + 7;
+                items[4] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
+            }
 
             /*pos = pos + 7;          
 
@@ -339,6 +344,11 @@ public class GridManager5 : MonoBehaviour
             if (pos != 1)
             {
                 items[4] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
+            }
+            else
+            {
+                pos = pos + 7;
+                items[5] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
             }
 
             /*pos = pos + 7;
@@ -372,6 +382,11 @@ public class GridManager5 : MonoBehaviour
             if (pos != 1)
             {
                 items[5] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
+            }
+            else
+            {
+                pos = pos + 7;
+                items[6] = InstantiateElemento(Comportamento.NENHUM, "07", gridPauta[pos]);
             }
 
             /*pos = pos + 7;

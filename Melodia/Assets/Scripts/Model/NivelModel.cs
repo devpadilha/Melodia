@@ -67,6 +67,9 @@ public class NivelModel
     {
         Nivel nivel = get(nivelNome);
         DificuldadeController dificuldade = new DificuldadeController();
+        PartidaController partida = new PartidaController();
+
+        bool fgNivelConcluido = partida.verificarNivelCompleto(ultimaPartida);
 
         string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id FROM nivel WHERE nome = @nome AND dificuldade_id = @dificuldade";
         var param = new Dictionary<string, string>();
@@ -79,12 +82,26 @@ public class NivelModel
         else if (ultimaPartida.Nivel.Dificuldade.Id.Equals((int) DificuldadeEnum.Dificuldade.FACIL))
         {
             param.Add("nome", nivelNome.ToUpper());
-            param.Add("dificuldade", "2");
+            if (fgNivelConcluido)
+            {
+                param.Add("dificuldade", "2");
+            }
+            else
+            {
+                param.Add("dificuldade", "1");
+            }    
         }
         else if (ultimaPartida.Nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
         {
             param.Add("nome", nivelNome.ToUpper());
-            param.Add("dificuldade", "3");
+            if (fgNivelConcluido)
+            {
+                param.Add("dificuldade", "3");
+            }
+            else
+            {
+                param.Add("dificuldade", "2");
+            }
         }
         else
         {

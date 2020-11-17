@@ -291,7 +291,7 @@ insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nive
 
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL', 5, 6, 4);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE FA', 7, 8, 4);
-insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DO', 23, 25, 4);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DO', 23, 24, 4);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('COLCHEIA', 25, 26, 4);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('HARMONIA', 27, 28, 4);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MELODIA', 29, 30, 4);
@@ -300,7 +300,7 @@ insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nive
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('PAUTA', 35, 36, 4);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL', 5, 6, 5);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE FA', 7, 8, 5);
-insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DO', 23, 25, 5);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DO', 23, 24, 5);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('COLCHEIA', 25, 26, 5);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('HARMONIA', 27, 28, 5);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MELODIA', 29, 30, 5);
@@ -309,7 +309,7 @@ insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nive
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('PAUTA', 35, 36, 5);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE SOL', 5, 6, 6);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE FA', 7, 8, 6);
-insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DO', 23, 25, 6);
+insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('CLAVE DE DO', 23, 24, 6);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('COLCHEIA', 25, 26, 6);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('HARMONIA', 27, 28, 6);
 insert into desafio (descricao, pergunta_elemento_id, resposta_elemento_id, nivel_id) values ('MELODIA', 29, 30, 6);

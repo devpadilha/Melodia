@@ -36,4 +36,14 @@
     {
         model.encerrarPartida(partida);
     }
+
+    public bool verificarNivelCompleto(Partida ultimaPartida)
+    {
+        return model.verificarNivelCompleto(ultimaPartida);
+    }
+
+    public Dificuldade obterDificuldadeJogador(Jogador jogador)
+    {
+        return model.obterDificuldadeJogador(jogador);
+    }
 }

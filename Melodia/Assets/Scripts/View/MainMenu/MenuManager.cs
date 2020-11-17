@@ -165,6 +165,7 @@ public class MenuManager : MonoBehaviour
         bool flag = false;
         Nivel nivel = nivelController.get(nivelNome.ToString());
         Partida ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
+        Dificuldade dificuldadeJogador = partidaController.obterDificuldadeJogador(usuario.Jogador);
         
         switch (nivelNome)
         {
@@ -173,7 +174,7 @@ public class MenuManager : MonoBehaviour
                 break;
 
             case NivelEnum.Nivel.NIVEL2:
-                if(ultimaPartida != null)
+                if(ultimaPartida != null && ultimaPartida.Nivel.Dificuldade.Id >= dificuldadeJogador.Id)
                 {
                     flag = true;
                 }
@@ -181,7 +182,7 @@ public class MenuManager : MonoBehaviour
                 {
                     nivel = nivelController.get(NivelEnum.Nivel.NIVEL1.ToString());
                     ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-                    if(ultimaPartida == null)
+                    if(ultimaPartida == null || ultimaPartida.Nivel.Dificuldade.Id < dificuldadeJogador.Id)
                     {
                         flag = false;
                     }
@@ -194,7 +195,7 @@ public class MenuManager : MonoBehaviour
                 break;
 
             case NivelEnum.Nivel.NIVEL3:
-                if (ultimaPartida != null)
+                if (ultimaPartida != null && ultimaPartida.Nivel.Dificuldade.Id >= dificuldadeJogador.Id)
                 {
                     flag = true;
                 }
@@ -202,7 +203,7 @@ public class MenuManager : MonoBehaviour
                 {
                     nivel = nivelController.get(NivelEnum.Nivel.NIVEL2.ToString());
                     ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-                    if (ultimaPartida == null)
+                    if (ultimaPartida == null || ultimaPartida.Nivel.Dificuldade.Id < dificuldadeJogador.Id)
                     {
                         flag = false;
                     }
@@ -215,7 +216,7 @@ public class MenuManager : MonoBehaviour
                 break;
 
             case NivelEnum.Nivel.NIVEL4:
-                if (ultimaPartida != null)
+                if (ultimaPartida != null && ultimaPartida.Nivel.Dificuldade.Id >= dificuldadeJogador.Id)
                 {
                     flag = true;
                 }
@@ -223,7 +224,7 @@ public class MenuManager : MonoBehaviour
                 {
                     nivel = nivelController.get(NivelEnum.Nivel.NIVEL3.ToString());
                     ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-                    if (ultimaPartida == null)
+                    if (ultimaPartida == null || ultimaPartida.Nivel.Dificuldade.Id < dificuldadeJogador.Id)
                     {
                         flag = false;
                     }
@@ -236,7 +237,7 @@ public class MenuManager : MonoBehaviour
                 break;
 
             case NivelEnum.Nivel.NIVEL5:
-                if (ultimaPartida != null)
+                if (ultimaPartida != null && ultimaPartida.Nivel.Dificuldade.Id >= dificuldadeJogador.Id)
                 {
                     flag = true;
                 }
@@ -244,7 +245,7 @@ public class MenuManager : MonoBehaviour
                 {
                     nivel = nivelController.get(NivelEnum.Nivel.NIVEL4.ToString());
                     ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-                    if (ultimaPartida == null)
+                    if (ultimaPartida == null || ultimaPartida.Nivel.Dificuldade.Id < dificuldadeJogador.Id)
                     {
                         flag = false;
                     }
@@ -258,7 +259,7 @@ public class MenuManager : MonoBehaviour
 
 
             case NivelEnum.Nivel.NIVEL6:
-                if (ultimaPartida != null)
+                if (ultimaPartida != null && ultimaPartida.Nivel.Dificuldade.Id >= dificuldadeJogador.Id)
                 {
                     flag = true;
                 }
@@ -266,7 +267,7 @@ public class MenuManager : MonoBehaviour
                 {
                     nivel = nivelController.get(NivelEnum.Nivel.NIVEL5.ToString());
                     ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-                    if (ultimaPartida == null)
+                    if (ultimaPartida == null || ultimaPartida.Nivel.Dificuldade.Id < dificuldadeJogador.Id)
                     {
                         flag = false;
                     }
@@ -279,7 +280,7 @@ public class MenuManager : MonoBehaviour
                 break;
 
             case NivelEnum.Nivel.NIVEL7:
-                if (ultimaPartida != null)
+                if (ultimaPartida != null && ultimaPartida.Nivel.Dificuldade.Id >= dificuldadeJogador.Id)
                 {
                     flag = true;
                 }
@@ -287,7 +288,7 @@ public class MenuManager : MonoBehaviour
                 {
                     nivel = nivelController.get(NivelEnum.Nivel.NIVEL6.ToString());
                     ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-                    if (ultimaPartida == null)
+                    if (ultimaPartida == null || ultimaPartida.Nivel.Dificuldade.Id < dificuldadeJogador.Id)
                     {
                         flag = false;
                     }

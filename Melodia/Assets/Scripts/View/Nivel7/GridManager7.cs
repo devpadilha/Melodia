@@ -230,7 +230,7 @@ public class GridManager7 : MonoBehaviour
 
         if (partida.Acertos >= nivel.MinAcertos)
         {
-            SceneManager.LoadScene("NivelCompleto");
+            SceneManager.LoadScene("Parabens");
         }
         else
         {
@@ -250,9 +250,8 @@ public class GridManager7 : MonoBehaviour
 
         if (partida == null)
         {
-            Debug.Log(ultimaPartida.Id);
-            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL7.ToString(), ultimaPartida);
-            Debug.Log(nivel.Dificuldade.Id);
+     
+            nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL7.ToString(), ultimaPartida);     
 
             if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
             {
