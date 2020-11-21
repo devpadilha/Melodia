@@ -272,6 +272,10 @@ public class PartidaModel
             partida.Nivel = nivel.get(Int32.Parse(retorno[7]));
             partida.Desafios = desafioController.getByPartida(partida);
         }
+        else
+        {
+            return dificuldadeController.get((int)DificuldadeEnum.Dificuldade.FACIL);
+        }
 
         bool fgConcluido = this.verificarNivelCompleto(partida);
 
