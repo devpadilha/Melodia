@@ -21,4 +21,9 @@
     {
         return model.getNext(nivelNome, ultimaPartida);
     }
+
+    public bool verificarNivelCompleto(Partida ultimaPartida)
+    {
+        return model.verificarNivelCompleto(ultimaPartida);
+    }
 }

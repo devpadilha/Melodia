@@ -17,7 +17,7 @@ public class NivelModel
         Nivel nivel = null;
         DificuldadeController dificuldade = new DificuldadeController();
 
-        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id FROM nivel WHERE id = @id";
+        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios FROM nivel WHERE id = @id";
         var param = new Dictionary<string, string>();
         param.Add("id", id.ToString());
         Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
@@ -32,6 +32,7 @@ public class NivelModel
             nivel.MaxErros = Int32.Parse(retorno[3]);
             nivel.MinAcertos = Int32.Parse(retorno[4]);
             nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[5]));
+            nivel.QtdeDesafios = Int32.Parse(retorno[6]);
         }
 
         return nivel;
@@ -42,7 +43,7 @@ public class NivelModel
         Nivel nivel = null;
         DificuldadeController dificuldade = new DificuldadeController();
 
-        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id FROM nivel WHERE nome = @nome and dificuldade_id = @dificuldade";
+        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios FROM nivel WHERE nome = @nome and dificuldade_id = @dificuldade";
         var param = new Dictionary<string, string>();
         param.Add("nome", nome);
         param.Add("dificuldade", "1");
@@ -58,6 +59,7 @@ public class NivelModel
             nivel.MaxErros = Int32.Parse(retorno[3]);
             nivel.MinAcertos = Int32.Parse(retorno[4]);
             nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[5]));
+            nivel.QtdeDesafios = Int32.Parse(retorno[6]);
         }
 
         return nivel;
@@ -68,10 +70,11 @@ public class NivelModel
         Nivel nivel = get(nivelNome);
         DificuldadeController dificuldade = new DificuldadeController();
         PartidaController partida = new PartidaController();
+        NivelController nivelController = new NivelController();
 
-        bool fgNivelConcluido = partida.verificarNivelCompleto(ultimaPartida);
+        bool fgNivelConcluido = nivelController.verificarNivelCompleto(ultimaPartida);
 
-        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id FROM nivel WHERE nome = @nome AND dificuldade_id = @dificuldade";
+        string query = "SELECT id, nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios FROM nivel WHERE nome = @nome AND dificuldade_id = @dificuldade";
         var param = new Dictionary<string, string>();
         
         if(ultimaPartida == null)
@@ -122,8 +125,45 @@ public class NivelModel
             nivel.MaxErros = Int32.Parse(retorno[3]);
             nivel.MinAcertos = Int32.Parse(retorno[4]);
             nivel.Dificuldade = dificuldade.get(Int32.Parse(retorno[5]));
+            nivel.QtdeDesafios = Int32.Parse(retorno[6]);
         }
 
         return nivel;
     }
+
+    public bool verificarNivelCompleto(Partida ultimaPartida)
+    {
+        if (ultimaPartida == null)
+        {
+            return false;
+        }
+
+        Nivel nivel = ultimaPartida.Nivel;
+        Jogador jogador = ultimaPartida.Jogador;
+        int count = 0;
+
+        string query = "SELECT COUNT(DISTINCT n.id) FROM partida p INNER JOIN nivel n ON n.id = p.nivel_id WHERE n.dificuldade_id = @dificuldade AND jogador_id = @jogador AND concluido = 1 AND data_termino is not null ";
+        var param = new Dictionary<string, string>();
+        param.Add("dificuldade", nivel.Dificuldade.Id.ToString());
+        param.Add("jogador", jogador.Id.ToString());
+
+
+        Dictionary<int, List<string>> retornos = dataBase.Select(query, param);
+        if (retornos.Count > 0)
+        {
+            List<string> retorno = retornos[0];
+            count = Int32.Parse(retorno[0]);
+        }
+
+        if (count >= 7)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 }

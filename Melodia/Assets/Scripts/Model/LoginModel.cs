@@ -19,7 +19,7 @@ public class LoginModel
         DataBase dataBase = new DataBase();
         JogadorController jogador = new JogadorController();
 
-        string query = "SELECT id, usuario, senha, ativo jogador_id FROM login WHERE id = @id";
+        string query = "SELECT id, usuario, senha, ativo, jogador_id FROM login WHERE id = @id";
         var param = new Dictionary<string, string>();
         param.Add("id", id.ToString());
         Dictionary<int, List<string>> retornos = dataBase.Select(query, param);

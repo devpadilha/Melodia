@@ -1,4 +1,7 @@
-﻿public class PartidaController
+﻿using System;
+using System.Collections.Generic;
+
+public class PartidaController
 {
     PartidaModel model;
 
@@ -27,23 +30,43 @@
         return model.getAtual(jogador, nivel);
     }
 
-    public Partida criarPartida(Jogador jogador, Nivel nivel, int qtdeDesafios)
+    public Partida criarPartida(Jogador jogador, Nivel nivel)
     {
-        return model.criarPartida(jogador, nivel, qtdeDesafios);
+        return model.criarPartida(jogador, nivel);
     }
 
     public void encerrarPartida(Partida partida)
     {
         model.encerrarPartida(partida);
-    }
+    }    
 
-    public bool verificarNivelCompleto(Partida ultimaPartida)
+    public Resultado calcularResultado(Partida ultimaPartida)
     {
-        return model.verificarNivelCompleto(ultimaPartida);
-    }
+        Resultado resultado = new Resultado();
+        Jogador jogador = ultimaPartida.Jogador;
+        Dificuldade dificuldade = ultimaPartida.Nivel.Dificuldade;
+        List<Partida> partidas = model.obterPartidas(jogador, dificuldade);
+        int totalAcertos = 0, totalErros = 0;
+        double totalTempo = 0.0d;
 
-    public Dificuldade obterDificuldadeJogador(Jogador jogador)
-    {
-        return model.obterDificuldadeJogador(jogador);
+        foreach(Partida partida in partidas)
+        {
+            totalAcertos += partida.Acertos;
+            totalErros += partida.Erros;
+
+            if (partida.DataTermino != null)
+            {
+                TimeSpan ts = partida.DataTermino - partida.DataInicio;
+                totalTempo += ts.TotalMinutes;
+            }
+        }
+
+        resultado.Dificuldade = dificuldade;
+        resultado.Jogador = jogador;
+        resultado.TotalAcertos = totalAcertos;
+        resultado.TotalErros = totalErros;
+        resultado.TotalTempo = totalTempo;        
+
+        return resultado;
     }
 }

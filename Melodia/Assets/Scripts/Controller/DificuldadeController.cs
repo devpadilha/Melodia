@@ -11,4 +11,10 @@
     {
         return model.get(id);
     }
+
+    public Dificuldade obterDificuldadeJogador(Jogador jogador)
+    {
+        return model.obterDificuldadeJogador(jogador);
+    }
+
 }

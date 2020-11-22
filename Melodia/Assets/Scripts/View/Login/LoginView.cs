@@ -38,6 +38,7 @@ public class LoginView : MonoBehaviour
         {
             sucesso = true;
             controller.setAtivo(login.Id);
+            PlayerPrefs.SetString("USUARIO", login.Id.ToString());
         }
 
 

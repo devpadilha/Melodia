@@ -47,7 +47,7 @@ public class GridManager2 : MonoBehaviour
 
         source = GetComponent<AudioSource>();
 
-        usuario = loginController.getAtivo();        
+        usuario = loginController.get(Int32.Parse(PlayerPrefs.GetString("USUARIO")));
 
         CriarPartida();
 
@@ -312,19 +312,8 @@ public class GridManager2 : MonoBehaviour
         if (partida == null)
         {
             nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL2.ToString(), ultimaPartida);
-
-            if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
-            {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 2);
-            }
-            else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
-            {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 3);
-            }
-            else if (nivel.Dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
-            {
-                partida = partidaController.criarPartida(usuario.Jogador, nivel, 4);
-            }
+            partida = partidaController.criarPartida(usuario.Jogador, nivel);
+            
         }
         else
         {

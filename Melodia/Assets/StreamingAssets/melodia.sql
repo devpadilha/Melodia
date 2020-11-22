@@ -23,6 +23,7 @@ create table nivel(
     id integer primary key,
     nome varchar(20),
     descricao varchar(140),
+    qtde_desafios integer,
     max_erros integer,
     min_acertos integer,
     dificuldade_id integer,
@@ -140,33 +141,33 @@ insert into dificuldade (nome, descricao) values ('FÁCIL', '');
 insert into dificuldade (nome, descricao) values ('MÉDIO', '');
 insert into dificuldade (nome, descricao) values ('DIFÍCIL', '');
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 3, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 4, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 5, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios ) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 4, 2, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 3, 1, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 5, 3, 5);
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 2, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 3, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 4, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 2, 1, 2);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 3, 2, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 4, 3, 4);
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL3', 'Nível 3 - TAC', 3, 2, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL3', 'Nível 3 - TAC', 3, 3, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL3', 'Nível 3 - TAC', 3, 4, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL3', 'Nível 3 - TAC', 3, 2, 1, 2);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL3', 'Nível 3 - TAC', 3, 3, 2, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL3', 'Nível 3 - TAC', 3, 4, 3, 4);
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 3, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 4, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 5, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 3, 1, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 4, 2, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL4', 'Nível 4 - ESCALA MUSICAL', 3, 5, 3, 5);
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 3, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 4, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 5, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 3, 1, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 4, 2, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL5', 'Nível 5 - PAUTA MUSICAL', 3, 5, 3, 5);
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 1, 2, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 1, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 2, 1, 2, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL6', 'Nível 6 - TEMPO MUSICAL', 1, 2, 3, 5);
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 2, 2, 1);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 2, 3, 2);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 1, 4, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 2, 2, 1, 2);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 2, 3, 2, 3);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL7', 'Nível 7 - TEMPO MUSICAL', 1, 4, 3, 4);
 
 insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '02');
 insert into elemento ( nome, descricao, resource) values('CLAVE DE SOL', 'nivel 1', '03');

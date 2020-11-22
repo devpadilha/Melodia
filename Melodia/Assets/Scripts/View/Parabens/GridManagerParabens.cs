@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,8 @@ public class GridManagerParabens : MonoBehaviour
     private NivelController nivelController;
     private ElementoController elementoController;
 
+    private Resultado resultado;
+
     private AudioSource source;
     public AudioClip clip;
 
@@ -21,7 +24,8 @@ public class GridManagerParabens : MonoBehaviour
 
     public Text mensagem;
     public Text tempo;
-    public Text desempenho;
+    public Text acertos;
+    public Text erros;
 
 
     // Start is called before the first frame update
@@ -36,8 +40,31 @@ public class GridManagerParabens : MonoBehaviour
 
         source = GetComponent<AudioSource>();
 
-        usuario = loginController.getAtivo();
-     
+        usuario = loginController.get(Int32.Parse(PlayerPrefs.GetString("USUARIO")));        
+
+        Partida ultimaPartida = partidaController.getUltima(usuario.Jogador);
+        Dificuldade dificuldade = ultimaPartida.Nivel.Dificuldade;
+
+        resultado = partidaController.calcularResultado(ultimaPartida);
+
+        if (dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
+        {
+            mensagem.text = "Você concluiu todos os níveis na dificuldade FÁCIL";
+        }
+        else if (dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
+        {
+            mensagem.text = "Você concluiu todos os níveis na dificuldade MÉDIA";
+        }
+        else if (dificuldade.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+        {
+            mensagem.text = "Você concluiu todos os níveis na dificuldade DIFÍCIL";
+        }
+
+        tempo.text = Math.Round(resultado.TotalTempo, 2).ToString() + " minutos";
+        acertos.text = resultado.TotalAcertos.ToString();
+        erros.text = resultado.TotalErros.ToString();
+
+
         CriarHUD();
     }    
 

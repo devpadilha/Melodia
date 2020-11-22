@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class MenuManager : MonoBehaviour
     private PartidaController partidaController;
     private NivelController nivelController;
     private QuestionarioController questionarioController;
+    private DificuldadeController dificuldadeController;
     private AudioSource source;
     public AudioClip clip;
     private string nextScene;
@@ -24,10 +26,11 @@ public class MenuManager : MonoBehaviour
         partidaController = new PartidaController();
         questionarioController = new QuestionarioController();
         nivelController = new NivelController();
+        dificuldadeController = new DificuldadeController();
 
         source = GetComponent<AudioSource>();
 
-        usuario = loginController.getAtivo();        
+        usuario = loginController.get(Int32.Parse(PlayerPrefs.GetString("USUARIO")));        
 
         carregarItems();
         carregarItensMenu();
@@ -63,12 +66,44 @@ public class MenuManager : MonoBehaviour
         huds[0] = Instantiate(icones[1], new Vector3(6, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[0].create("SAIR", "1");
 
-        PlayerPrefs.SetString("SOM", "ON");
+        string som = PlayerPrefs.GetString("SOM");
 
-        huds[1] = Instantiate(icones[4], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
-        huds[1].create("SOMOFF", "4");
- 
+        if(som == null || som == "")
+        {
+            PlayerPrefs.SetString("SOM", "ON");
+            som = PlayerPrefs.GetString("SOM");
+        }
 
+        if (som.Equals("ON"))
+        {
+            backgroudSound.UnPause();
+            huds[1] = Instantiate(icones[4], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[1].create("SOMOFF", "4");
+        }
+        else
+        {
+            backgroudSound.Pause();
+            huds[1] = Instantiate(icones[5], new Vector3(3, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[1].create("SOMON", "5");
+        }
+
+        Dificuldade dificuldadeJogador = dificuldadeController.obterDificuldadeJogador(usuario.Jogador);
+
+        if (dificuldadeJogador.Id.Equals((int)DificuldadeEnum.Dificuldade.FACIL))
+        {
+            huds[2] = Instantiate(icones[3], new Vector3(-8, 4), Quaternion.identity).GetComponent<ItemHud>();
+        }
+        else if (dificuldadeJogador.Id.Equals((int)DificuldadeEnum.Dificuldade.MEDIO))
+        {
+            huds[2] = Instantiate(icones[3], new Vector3(-8, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[3] = Instantiate(icones[3], new Vector3(-7, 4), Quaternion.identity).GetComponent<ItemHud>();
+        }
+        else if (dificuldadeJogador.Id.Equals((int)DificuldadeEnum.Dificuldade.DIFICIL))
+        {
+            huds[2] = Instantiate(icones[3], new Vector3(-8, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[4] = Instantiate(icones[3], new Vector3(-7, 4), Quaternion.identity).GetComponent<ItemHud>();
+            huds[5] = Instantiate(icones[3], new Vector3(-6, 4), Quaternion.identity).GetComponent<ItemHud>();
+        }
 
         ItemHud.OnMouseOverItemEventHandler += HudClick;
     }
@@ -165,7 +200,7 @@ public class MenuManager : MonoBehaviour
         bool flag = false;
         Nivel nivel = nivelController.get(nivelNome.ToString());
         Partida ultimaPartida = partidaController.getUltimaNivel(usuario.Jogador, nivel);
-        Dificuldade dificuldadeJogador = partidaController.obterDificuldadeJogador(usuario.Jogador);
+        Dificuldade dificuldadeJogador = dificuldadeController.obterDificuldadeJogador(usuario.Jogador);
         
         switch (nivelNome)
         {

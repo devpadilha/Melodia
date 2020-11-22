@@ -48,7 +48,7 @@ public class GridManager5 : MonoBehaviour
 
         source = GetComponent<AudioSource>();
 
-        usuario = loginController.getAtivo();
+        usuario = loginController.get(Int32.Parse(PlayerPrefs.GetString("USUARIO")));
 
         CriarPartida();
 
@@ -137,7 +137,7 @@ public class GridManager5 : MonoBehaviour
         if (partida == null)
         {
             nivel = nivelController.getNext(NivelEnum.Nivel.NIVEL5.ToString(), ultimaPartida);
-            partida = partidaController.criarPartida(usuario.Jogador, nivel, 5);
+            partida = partidaController.criarPartida(usuario.Jogador, nivel);
         }
         else
         {

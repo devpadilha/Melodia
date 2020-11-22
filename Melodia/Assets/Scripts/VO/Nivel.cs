@@ -3,6 +3,7 @@
     private int id;
     private string nome;
     private string descricao;
+    private int qtdeDesafios;
     private int maxErros;
     private int minAcertos;
     private Dificuldade dificuldade;
@@ -40,6 +41,18 @@
         set
         {
             descricao = value;
+        }
+    }
+
+    public int QtdeDesafios
+    {
+        get
+        {
+            return qtdeDesafios;
+        }
+        set
+        {
+            qtdeDesafios = value;
         }
     }
 
