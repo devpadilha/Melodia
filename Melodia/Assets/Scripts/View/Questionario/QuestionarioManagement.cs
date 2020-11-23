@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,12 +35,13 @@ public class QuestionarioManagement : MonoBehaviour
 
         CriarHUD();
 
-        usuario = loginController.getAtivo();
+        usuario = loginController.get(Int32.Parse(PlayerPrefs.GetString("USUARIO")));
         ultimaPartida = partidaController.getUltima(usuario.Jogador);
 
         nivelNome = PlayerPrefs.GetString("NIVEL");
         
         nivel = nivelController.get(nivelNome);
+        Debug.Log(nivel.Id);
         questionario = questionarioController.getByNivel(nivel);
         
 

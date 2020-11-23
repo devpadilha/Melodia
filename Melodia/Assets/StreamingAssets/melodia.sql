@@ -141,8 +141,8 @@ insert into dificuldade (nome, descricao) values ('FÁCIL', '');
 insert into dificuldade (nome, descricao) values ('MÉDIO', '');
 insert into dificuldade (nome, descricao) values ('DIFÍCIL', '');
 
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios ) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 4, 2, 5);
-insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 3, 1, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios ) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 4, 1, 5);
+insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 3, 2, 5);
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL1', 'Nível 1 - Assimilação', 3, 5, 3, 5);
 
 insert into nivel (nome, descricao, max_erros, min_acertos, dificuldade_id, qtde_desafios) values ('NIVEL2', 'Nível 2 - Jogo da Memória', 3, 2, 1, 2);
