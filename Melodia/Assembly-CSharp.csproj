@@ -118,6 +118,7 @@
     <Compile Include="Assets\Scripts\View\NivelCompleto\ItemGridNC.cs" />
     <Compile Include="Assets\Scripts\View\Parabens\GridManagerParabens.cs" />
     <Compile Include="Assets\Scripts\View\Questionario\QuestionarioManagement.cs" />
+    <Compile Include="Assets\Scripts\View\Sobre\SobreManager.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

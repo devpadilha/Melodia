@@ -61,10 +61,12 @@ public class MenuManager : MonoBehaviour
     private void CriarHUD()
     {
         GameObject[] icones = Resources.LoadAll<GameObject>("Hud");
-        huds = new ItemHud[6];       
+        huds = new ItemHud[7];       
 
         huds[0] = Instantiate(icones[1], new Vector3(6, 4), Quaternion.identity).GetComponent<ItemHud>();
         huds[0].create("SAIR", "1");
+        huds[6] = Instantiate(icones[7], new Vector3(6, -4.5f), Quaternion.identity).GetComponent<ItemHud>();
+        huds[6].create("SOBRE", "1");
 
         string som = PlayerPrefs.GetString("SOM");
 
@@ -118,6 +120,11 @@ public class MenuManager : MonoBehaviour
                 MenuItem.OnMouseOverItemEventHandler -= MouseClick;
                 Debug.Log("Saindo...");
                 Application.Quit();
+                break;
+
+            case "SOBRE":
+                ItemHud.OnMouseOverItemEventHandler -= HudClick;
+                SceneManager.LoadScene("Sobre");
                 break;
 
             case "SOMOFF":
